@@ -1,0 +1,81 @@
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;800&display=swap");
+@import "./animations.scss";
+
+body {
+	// font-family: "Poppins", sans-serif;
+	*:not(.fa) {
+		font-family: "Montserrat", sans-serif !important;
+	}
+}
+.__mti_hero_section {
+	background-image: url("../imgs/alejandro-escamilla.jpg");
+	background-repeat: no-repeat;
+	background-size: 100% 120vh;
+	background-position: 0% 50%;
+	min-height: 86.7vh;
+	position: relative;
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+
+	&::before { 
+		background-color: #0e0e0ee0;
+		backdrop-filter: blur(2px);
+		position: absolute;
+		height: 100%;
+		width: 100%;
+		left: 0;
+		content: "";
+	}
+	.__mti_hero_section_intro {
+		align-self: center;
+		position: relative;
+		top: 50px;
+		padding: 0 2em;
+		animation-duration: 2s;
+		animation-name: intro_fade;
+		animation-fill-mode: forwards;
+		opacity: 0;
+
+		> h2 {
+			color: whitesmoke;
+			font-size: 3em;
+			font-weight: 800;
+			margin: 0;
+			line-height: 1.5em;
+		}
+
+		> a.btn {
+			margin-top: 20px;
+			font-size: 1em !important;
+			padding: 1em 2em !important;
+		}
+	}
+
+	#scroll-down {
+		position: relative;
+		align-self: flex-end;
+		margin: 0 auto;
+		animation-name: bouncing_arrow;
+		animation-duration: 0.6s;
+		animation-iteration-count: infinite;
+		animation-direction: alternate;
+		animation-fill-mode: forwards;
+		top: -30px;
+
+		.__mit_bouncing_arrow {
+			height: 50px;
+			width: 50px;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			border-radius: 50%;
+			background-color: whitesmoke;
+			> i {
+				position: relative;
+				top: 2px;
+				font-size: 1.2em;
+			}
+		}
+	}
+}

@@ -1,0 +1,21 @@
+@keyframes intro_fade {
+	0% {
+		transform: translateY(30px);
+	}
+
+	100% {
+		transform: translateY(0);
+		opacity: 1;
+	}
+}
+
+@keyframes bouncing_arrow {
+	0% {
+		transform: translateY(10px);
+	}
+
+	100% {
+		transform: translateY(0);
+		opacity: 1;
+	}
+}

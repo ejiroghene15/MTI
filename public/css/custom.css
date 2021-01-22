@@ -1,0 +1,117 @@
+@import url(https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;800&display=swap);
+@-webkit-keyframes intro_fade {
+  0% {
+    transform: translateY(30px);
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+@keyframes intro_fade {
+  0% {
+    transform: translateY(30px);
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+@-webkit-keyframes bouncing_arrow {
+  0% {
+    transform: translateY(10px);
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+@keyframes bouncing_arrow {
+  0% {
+    transform: translateY(10px);
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+body *:not(.fa) {
+  font-family: "Montserrat", sans-serif !important;
+}
+
+.__mti_hero_section {
+  background-image: url(/images/alejandro-escamilla.jpg?48bc5463e34831cf29c41392ba87e2be);
+  background-repeat: no-repeat;
+  background-size: 100% 120vh;
+  background-position: 0% 50%;
+  min-height: 86.7vh;
+  position: relative;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+}
+.__mti_hero_section::before {
+  background-color: #0e0e0ee0;
+  -webkit-backdrop-filter: blur(2px);
+          backdrop-filter: blur(2px);
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  left: 0;
+  content: "";
+}
+.__mti_hero_section .__mti_hero_section_intro {
+  align-self: center;
+  position: relative;
+  top: 50px;
+  padding: 0 2em;
+  -webkit-animation-duration: 2s;
+          animation-duration: 2s;
+  -webkit-animation-name: intro_fade;
+          animation-name: intro_fade;
+  -webkit-animation-fill-mode: forwards;
+          animation-fill-mode: forwards;
+  opacity: 0;
+}
+.__mti_hero_section .__mti_hero_section_intro > h2 {
+  color: whitesmoke;
+  font-size: 3em;
+  font-weight: 800;
+  margin: 0;
+  line-height: 1.5em;
+}
+.__mti_hero_section .__mti_hero_section_intro > a.btn {
+  margin-top: 20px;
+  font-size: 1em !important;
+  padding: 1em 2em !important;
+}
+.__mti_hero_section #scroll-down {
+  position: relative;
+  align-self: flex-end;
+  margin: 0 auto;
+  -webkit-animation-name: bouncing_arrow;
+          animation-name: bouncing_arrow;
+  -webkit-animation-duration: 0.6s;
+          animation-duration: 0.6s;
+  -webkit-animation-iteration-count: infinite;
+          animation-iteration-count: infinite;
+  -webkit-animation-direction: alternate;
+          animation-direction: alternate;
+  -webkit-animation-fill-mode: forwards;
+          animation-fill-mode: forwards;
+  top: -30px;
+}
+.__mti_hero_section #scroll-down .__mit_bouncing_arrow {
+  height: 50px;
+  width: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background-color: whitesmoke;
+}
+.__mti_hero_section #scroll-down .__mit_bouncing_arrow > i {
+  position: relative;
+  top: 2px;
+  font-size: 1.2em;
+}
