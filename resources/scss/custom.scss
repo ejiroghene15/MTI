@@ -1,81 +1,673 @@
 @import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;800&display=swap");
 @import "./animations.scss";
+@import "./variables.scss";
+
+html {
+    height: 100%;
+}
 
 body {
-	// font-family: "Poppins", sans-serif;
-	*:not(.fa) {
-		font-family: "Montserrat", sans-serif !important;
-	}
+    height: 100%;
+    // font-family: "Poppins", sans-serif;
+    *:not(.fa, .ni) {
+        font-family: "Montserrat", sans-serif !important;
+    }
 }
-.__mti_hero_section {
-	background-image: url("../imgs/alejandro-escamilla.jpg");
-	background-repeat: no-repeat;
-	background-size: 100% 120vh;
-	background-position: 0% 50%;
-	min-height: 86.7vh;
-	position: relative;
-	display: flex;
-	flex-wrap: wrap;
-	align-items: center;
 
-	&::before { 
-		background-color: #0e0e0ee0;
-		backdrop-filter: blur(2px);
-		position: absolute;
-		height: 100%;
-		width: 100%;
-		left: 0;
-		content: "";
-	}
-	.__mti_hero_section_intro {
-		align-self: center;
-		position: relative;
-		top: 50px;
-		padding: 0 2em;
-		animation-duration: 2s;
-		animation-name: intro_fade;
-		animation-fill-mode: forwards;
-		opacity: 0;
-
-		> h2 {
-			color: whitesmoke;
-			font-size: 3em;
-			font-weight: 800;
-			margin: 0;
-			line-height: 1.5em;
-		}
-
-		> a.btn {
-			margin-top: 20px;
-			font-size: 1em !important;
-			padding: 1em 2em !important;
-		}
-	}
-
-	#scroll-down {
-		position: relative;
-		align-self: flex-end;
-		margin: 0 auto;
-		animation-name: bouncing_arrow;
-		animation-duration: 0.6s;
-		animation-iteration-count: infinite;
-		animation-direction: alternate;
-		animation-fill-mode: forwards;
-		top: -30px;
-
-		.__mit_bouncing_arrow {
-			height: 50px;
-			width: 50px;
-			display: flex;
-			align-items: center;
-			justify-content: center;
-			border-radius: 50%;
-			background-color: whitesmoke;
-			> i {
-				position: relative;
-				top: 2px;
-				font-size: 1.2em;
-			}
-		}
-	}
+#page_layout {
+    display: grid;
+    height: 100%;
+    grid-template-rows: max-content minmax(max-content, 1fr) auto;
+    overflow-y: auto;
 }
+
+#general_nav {
+    .navbar-brand {
+        font-size: 1.2em;
+    }
+    .nav-link {
+        font-weight: 600;
+        &.nav-link-icon {
+            font-size: 0.9em;
+        }
+    }
+}
+
+#homepage {
+    background-color: #dddddd59;
+    .hero_section {
+        background-image: url("/images/alejandro-escamilla.jpg");
+        background-attachment: fixed;
+        background-repeat: no-repeat;
+        background-size: 100% 120vh;
+        min-height: 89vh;
+        position: relative;
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+
+        &::before {
+            background-color: #0e0e0eb0;
+            position: absolute;
+            height: 100%;
+            width: 100%;
+            left: 0;
+            content: "";
+        }
+
+        .section_intro {
+            align-self: center;
+            position: relative;
+            top: 70px;
+            margin-bottom: 100px;
+            padding: 0 3vmax;
+            animation-duration: 2s;
+            animation-name: intro_fade;
+            animation-fill-mode: forwards;
+            opacity: 0;
+
+            > .main_text {
+                color: whitesmoke;
+                font-size: clamp(8vmin, 10vmin, 8vmin);
+                font-weight: 800;
+                margin: 0;
+                line-height: 1.4em;
+                margin-bottom: 10px;
+            }
+
+            > a.btn {
+                margin-top: 20px;
+                font-size: 1em !important;
+                padding: 1em 2em !important;
+            }
+        }
+
+        #scroll-down {
+            flex-basis: 100%;
+            text-align: center;
+            position: relative;
+            animation-name: bouncing_arrow;
+            animation-duration: 0.6s;
+            animation-iteration-count: infinite;
+            animation-direction: alternate;
+            animation-fill-mode: forwards;
+            margin-bottom: 3em;
+            top: 30px;
+
+            .bouncing_arrow {
+                margin: auto;
+                height: 50px;
+                width: 50px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                border-radius: 50%;
+                background-color: whitesmoke;
+
+                > i {
+                    position: relative;
+                    top: 2px;
+                    font-size: 1.2em;
+                }
+            }
+        }
+    }
+
+    .blog {
+        @include fancy_scrollbar;
+        overflow-x: auto;
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        grid-template-rows: repeat(1, 180px);
+        gap: 2em;
+        // white-space: nowrap;
+        padding-bottom: 30px;
+
+        .blog-post {
+            border-radius: 10px;
+            position: relative;
+            box-shadow: 0px 0px 10px #010d2114;
+            width: 36em;
+
+            .excerpt {
+                height: 100%;
+                display: flex;
+                border: 0;
+                .thumbnail {
+                    flex: 1 1 20vmax;
+                    .card-img-top {
+                        border-radius: 5px;
+                        height: 100%;
+                        width: 100%;
+                    }
+                }
+
+                .info {
+                    flex: 1 1 30vmax;
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: space-around;
+                    padding: 1em;
+                    .title {
+                        font-weight: 600;
+                        span {
+                            display: block;
+                            font-size: 1.2em;
+                            white-space: break-spaces;
+                            margin-bottom: 10px;
+                        }
+                        small {
+                            font-size: 1em;
+                            font-weight: 500;
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    .tutors_section {
+        height: auto;
+
+        .label {
+            color: #fff;
+            margin-bottom: 1em;
+        }
+
+        .wrapper {
+            padding: 1em 0 1em;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: auto;
+            @include fancy_scrollbar;
+            @include mq(700) {
+                justify-content: start;
+            }
+            .tutor_info {
+                padding: 0 2em;
+
+                img {
+                    border-radius: 50%;
+                    width: 250px;
+                    height: 250px;
+                    box-shadow: 0px 0px 3px 3px #476cab47,
+                        -2px -2px 2px 2px #172b4d;
+                    @include mq(768) {
+                        height: 200px !important;
+                        width: 200px !important;
+                    }
+                }
+                &:first-of-type,
+                &:last-of-type {
+                    img {
+                        width: 150px;
+                        height: 150px;
+                    }
+                }
+                .name {
+                    color: #fff;
+                    padding-top: 10px;
+                    font-weight: bold;
+                    .role {
+                        display: block;
+                        line-height: 2em;
+                        font-size: 14px;
+                        font-weight: normal;
+                    }
+                }
+            }
+        }
+    }
+
+    .upcoming_events {
+        padding: 0 5vmax;
+        @include mq(768) {
+            padding: 0 1vmax;
+        }
+        .event_listing {
+            margin-top: 1em;
+            display: flex;
+            gap: 1.2em;
+            flex-wrap: wrap;
+            justify-content: center;
+            article {
+                position: relative;
+                height: 250px;
+                overflow: hidden;
+                border-radius: 5px;
+                flex: 1 0 0;
+
+                &:nth-of-type(1),
+                &:nth-child(4) {
+                    min-width: 60%;
+                }
+                &:nth-of-type(2),
+                &:nth-child(3) {
+                    min-width: 28%;
+                    @include mq(768) {
+                        min-width: 100%;
+                    }
+                }
+
+                .event_detail {
+                    display: flex;
+                    background-color: #010d219e;
+                    position: absolute;
+                    height: 100%;
+                    width: 100%;
+                    left: 0;
+                    top: 0;
+                    content: "";
+                    color: #fff;
+                    z-index: 4;
+                    .event_title {
+                        font-size: 2em;
+                        font-weight: bold;
+                        color: #fff;
+                        line-height: 1.4em;
+                    }
+                    .event_date {
+                        font-weight: 500;
+                        font-size: 1em;
+                        color: #fff;
+                    }
+                }
+
+                .event_img {
+                    border-radius: 5px;
+                    width: 100%;
+                    object-fit: cover;
+                }
+            }
+        }
+    }
+}
+
+#course_page {
+    .banner {
+        &::before {
+            background-color: #0e0e0e9e;
+            backdrop-filter: blur(2px);
+            position: absolute;
+            height: 100%;
+            width: 100%;
+            left: 0;
+            content: "";
+        }
+        position: relative;
+        height: 500px;
+        img {
+            height: 100%;
+            width: 100%;
+            margin: auto;
+            display: block;
+        }
+    }
+
+    .about_course {
+        position: relative;
+        top: -30vh;
+        gap: 2em;
+        > .course_title {
+            font-weight: 600;
+            color: white;
+            line-height: 2em;
+            font-size: 3em;
+            text-align: center;
+        }
+        > article {
+            padding: 2em;
+            margin: 0 3em;
+            border-radius: 5px;
+            box-shadow: 0px 0px 10px #010d2114;
+            background-color: white;
+            display: flex;
+            column-gap: 2em;
+            justify-content: space-between;
+            > article {
+                flex-basis: 68%;
+                .excerpt {
+                    label {
+                        font-weight: 600;
+                        font-size: 1.2em;
+                        text-transform: capitalize;
+                    }
+                    article {
+                        font-size: 15px;
+                        line-height: 1.8em;
+                    }
+                }
+            }
+
+            > aside {
+                flex-basis: auto;
+                label {
+                    font-weight: 600;
+                    font-size: 1.3rem;
+                }
+                .tutor_info {
+                    border-radius: 5px;
+                    box-shadow: 0px 2px 10px #25262914;
+                    img {
+                        height: 250px;
+                        width: 300px;
+                        border-radius: 5px 5px 0 0;
+                        display: block;
+                    }
+                    .name {
+                        font-weight: 600;
+                    }
+                    .role {
+                        font-size: 14px;
+                        display: block;
+                        line-height: 1.5em;
+                    }
+                }
+            }
+        }
+    }
+}
+
+#our_team {
+    padding: 2em;
+    background-image: url("/images/team.jpg");
+    background-size: 100% 100%;
+    background-attachment: fixed;
+
+    .grids {
+        display: grid;
+        grid-auto-rows: 50px;
+        gap: 3em;
+        justify-content: center;
+        > article {
+            height: 220px;
+            width: 300px;
+            background-color: red;
+            border-radius: 5px 5px 0px 0px;
+            > div {
+                border-radius: 0px 0px 5px 5px;
+                padding: 0.4em;
+                color: white !important;
+                span {
+                    display: block;
+                    &.name {
+                        font-weight: 600;
+                        font-size: 15px;
+                    }
+                    &.role {
+                        font-weight: normal;
+                        font-size: 13px;
+                    }
+                }
+            }
+            > img {
+                border-radius: 5px 5px 0px 0px;
+                width: 100%;
+                height: 100%;
+                // display: none;
+            }
+
+            &:nth-of-type(1) {
+                grid-column: 1/2;
+            }
+
+            &:nth-of-type(2) {
+                grid-column: 3/4;
+                grid-row: 4;
+            }
+
+            &:nth-of-type(3) {
+                background-color: goldenrod;
+                grid-column: 5/6;
+            }
+
+            &:nth-of-type(4) {
+                grid-column: 1/2;
+                grid-row: 7 / 12;
+            }
+
+            &:nth-of-type(5) {
+                grid-column: 5/6;
+                grid-row: 7 / 12;
+            }
+        }
+    }
+}
+
+#bio {
+    section.bg {
+        background: url("/images/bio-bg.jpg");
+        height: 300px;
+        background-size: 100% 100%;
+        background-repeat: no-repeat;
+        position: relative;
+        display: flex;
+        align-items: flex-end;
+        justify-content: center;
+        > div {
+            position: relative;
+            text-align: center;
+            top: 70px;
+            z-index: 4;
+            p {
+                color: white;
+                font-weight: 600;
+                font-size: 1.5em;
+            }
+            img {
+                height: 150px;
+                width: 150px;
+                border-radius: 50%;
+            }
+        }
+        &::after {
+            position: absolute;
+            content: "";
+            height: 100%;
+            width: 100%;
+            top: 0;
+            left: 0;
+            background-color: #010d219e;
+        }
+    }
+
+    .bio_info {
+        margin-top: 80px;
+        padding: 2em;
+        display: flex;
+        gap: 2em;
+        > article {
+            flex-basis: 65%;
+            .excerpt {
+                border-radius: 5px;
+                padding: 1em;
+                box-shadow: 0px 1px 5px 1px #010d211a;
+                label {
+                    font-size: 18px;
+                    font-weight: 600;
+                }
+                article {
+                    font-size: 15px;
+                    line-height: 1.8em;
+                }
+            }
+        }
+
+        > aside {
+            flex: 1 1 auto;
+            > label {
+                font-weight: 600;
+                font-size: 1.5em;
+            }
+            > .tutor_info {
+                display: flex;
+                align-items: center;
+                column-gap: 1.5em;
+                background: #172b4d;
+                border-radius: 0px 7px 7px 0px;
+                img {
+                    height: 120px;
+                    width: 140px;
+                }
+                p {
+                    span {
+                        display: block;
+                        &.name {
+                            font-weight: 600;
+                        }
+                        &.role {
+                            font-size: 14px;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+#library {
+    background: url("/images/library-bg.jpg");
+    background-size: 100%;
+    background-repeat: no-repeat;
+    background-position: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    > div {
+        padding: 1em 2em;
+        background-color: #fff;
+        opacity: 0.7;
+        border-radius: 5px;
+        > h5 {
+            background: url("/images/library-bg.jpg");
+            background-size: 100%;
+            background-position: center;
+            font-size: 4em;
+            font-weight: 600;
+            background-clip: text;
+            -webkit-background-clip: text;
+            color: transparent;
+            line-height: 1.2em;
+            padding: 20px;
+            text-align: center;
+            label {
+                font-size: 0.5em;
+                line-height: 0;
+            }
+        }
+    }
+}
+
+#tutors_page {
+    > article {
+        padding: 2em;
+        h3 {
+            font-weight: 600;
+        }
+        .excerpt {
+            line-height: 2em;
+        }
+
+        .tutor_images {
+            margin: 3em 0;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1.5em;
+            > .tt_card {
+                position: relative;
+                box-shadow: 0px 0px 10px #010d2114;
+                border-radius: 5px;
+                height: 250px;
+                overflow: hidden;
+                .tt_card_img img {
+                    height: 100%;
+                    width: 100%;
+                    display: block;
+                    border-radius: 5px;
+                }
+                .card_label {
+                    position: absolute;
+                    width: 100%;
+                    padding: 0.7em;
+                    bottom: 0;
+                    background-color: #172b4d;
+                    span {
+                        color: #ddd;
+                        display: block;
+                        &.name {
+                            font-weight: 600;
+                            font-size: 15px;
+                        }
+                        &.role {
+                            font-size: 13px;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+#registration_page,
+#login_page {
+    position: relative;
+    background: url("/images/alejandro-escamilla.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: 100% 120vh;
+
+    &::before {
+        background-color: #0e0e0eb0;
+        position: absolute;
+        height: 100%;
+        width: 100%;
+        left: 0;
+        content: "";
+    }
+
+    form {
+        position: relative;
+        width: min(100%, 50vmax);
+        margin: 5em auto;
+        label {
+            font-weight: 600;
+        }
+        .form-wrapper {
+            background-color: #f4f5f7;
+            border-radius: 5px;
+            padding: 1.5em;
+            header {
+                font-size: 1.5em;
+                font-weight: 600;
+                padding: 0 0 1em;
+                text-transform: capitalize;
+            }
+            .form-error {
+                font-size: 13px;
+                font-weight: 600;
+                color: #f5365cc7;
+            }
+            .form-control {
+                font-weight: 600;
+                font-size: 14px;
+            }
+        }
+    }
+}
+
+#general_footer {
+    nav a {
+        color: #fff;
+        margin: 0 10px;
+        font-size: 14px;
+    }
+    .social img {
+        height: 30px;
+        width: 30px;
+        margin-left: -10px;
+    }
+}
+
+@import "./breakpoint.scss";

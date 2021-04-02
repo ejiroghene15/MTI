@@ -1,0 +1,44 @@
+@include mq(768) {
+    #homepage {
+        .hero_section {
+            background-size: 100% 80%;
+            min-height: 63vh;
+
+            .section_intro {
+                .main_text {
+                    font-size: 2.5em;
+                }
+
+                .sub_text {
+                    font-size: 1.3em;
+                }
+            }
+
+            #scroll-down {
+                display: none;
+            }
+        }
+    }
+
+    #general_footer {
+        nav {
+            flex-wrap: wrap;
+            text-align: center;
+            span {
+                flex-basis: 100%;
+                line-height: 2.8em;
+            }
+        }
+    }
+}
+
+@include mq(620) {
+}
+
+@include mq(480) {
+    #homepage {
+        .hero_section {
+            background-size: cover;
+        }
+    }
+}

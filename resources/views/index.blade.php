@@ -1,95 +1,165 @@
-<!DOCTYPE html>
-<html>
+@extends('layout.master')
+@section('body')
 
-    <head>
-        <meta charset="utf-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-        <title>MTI | Home</title>
-        @include('layout.styles')
-    </head>
+@include('partials.nav')
 
-    <body>
-        <header>
-            <nav class="navbar navbar-expand-lg navbar-dark bg-default">
-                <div class="container-fluid">
-                    <a class="navbar-brand" href="#">Midas Touch Academy</a>
-                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-default"
-                        aria-controls="navbar-default" aria-expanded="false" aria-label="Toggle navigation">
-                        <span class="navbar-toggler-icon"></span>
-                    </button>
-                    <div class="collapse navbar-collapse" id="navbar-default">
-                        <div class="navbar-collapse-header">
-                            <div class="row">
-                                <div class="col-6 collapse-brand">
-                                    <a href="javascript:void(0)">
-                                        <img src="/assets/img/brand/blue.png" />
-                                    </a>
-                                </div>
-                                <div class="col-6 collapse-close">
-                                    <button type="button" class="navbar-toggler" data-toggle="collapse"
-                                        data-target="#navbar-default" aria-controls="navbar-default"
-                                        aria-expanded="false" aria-label="Toggle navigation">
-                                        <span></span>
-                                        <span></span>
-                                    </button>
-                                </div>
-                            </div>
+<main id="homepage">
+    <section class="hero_section">
+        <section class="section_intro">
+            <h2 class="main_text"> Midas Touch Academy</h2>
+            <h4 class="text-light sub_text">An online platform for remote learning, skill acquisition and
+                outsourcing.. </h4>
+            <a href="{{ route('register') }}" class="btn btn-default ">Join Academy</a>
+        </section>
+        <section id="scroll-down">
+            <a href="" class="bouncing_arrow"><i class="fa fa-chevron-down"></i> </a>
+        </section>
+    </section>
+
+    <div class="container-fluid">
+        <section for="blog-posts" class="card-body my-5">
+            <h4 class="text-dark font-weight-bold">Blog Posts</h4>
+
+            <div class="blog mb-3">
+
+                <article class="blog-post">
+                    <a class="excerpt">
+                        <div class="thumbnail"><img src="{{ asset('/images/alejandro-escamilla.jpg') }}"
+                                class="card-img-top" alt="..."></div>
+                        <div class="info">
+                            <h6 class="title">
+                                <span>Learn the rudiments of Fashion Design</span>
+                                <small> Shade's Attires</small>
+                            </h6>
                         </div>
+                    </a>
+                </article>
 
-                        <ul class="navbar-nav ml-lg-auto">
-                            <li class="nav-item dropdown">
-                                <a class="nav-link nav-link-icon" href="#" role="button" data-toggle="dropdown"
-                                    aria-haspopup="false">
-                                    <span>Academy <i class="fa fa-angle-down"></i></span>
-                                </a>
-                                <div class="dropdown-menu dropdown-menu-right">
-                                    <a class="dropdown-item" href="#">Action</a>
-                                    <a class="dropdown-item" href="#">Another action</a>
-                                </div>
-                            </li>
+                <article class="blog-post">
+                    <a class="excerpt">
+                        <div class="thumbnail"><img src="{{ asset('/images/alejandro-escamilla.jpg') }}"
+                                class="card-img-top" alt="..."></div>
+                        <div class="info">
+                            <h6 class="title">
+                                <span>Collaborating with various designers</span>
+                                <small> Gabriel Pexel</small>
+                            </h6>
+                        </div>
+                    </a>
+                </article>
 
-                            <li class="nav-item">
-                                <a class="nav-link " href="#">
-                                    <span>Library</span>
-                                </a>
-                            </li>
+                <article class="blog-post">
+                    <a class="excerpt">
+                        <div class="thumbnail"><img src="{{ asset('/images/alejandro-escamilla.jpg') }}"
+                                class="card-img-top" alt="..."></div>
+                        <div class="info">
+                            <h6 class="title">
+                                <span>How ointments made me millions</span>
+                                <small> Cecil Palms</small>
+                            </h6>
+                        </div>
+                    </a>
+                </article>
 
-                            <li class="nav-item">
-                                <a class="nav-link " href="#">
-                                    <span>Blog</span>
-                                </a>
-                            </li>
-
-                            <li class="nav-item">
-                                <a class="nav-link " href="#">
-                                    <span>Sign In</span>
-                                </a>
-                            </li>
-
-                        </ul>
-                    </div>
-                </div>
-            </nav>
-        </header>
-
-        <main>
-            <div class="__mti_hero_section px-3">
-                <div class="container-fluid position-relative">
-                    <section class="__mti_hero_section_intro">
-                        <h2> Midas Touch Academy</h2>
-                        <h4 class="text-light">An online platform for remote learning, skill acquisition and
-                            outsourcing.. </h4>
-                        <a href="#" class="btn btn-default ">Join Academy</a>
-                    </section>
-                </div>
-                <section id="scroll-down">
-                    <a href="" class="__mit_bouncing_arrow"><i class="fa fa-chevron-down"></i> </a>
-                </section>
+                <article class="blog-post">
+                    <a class="excerpt">
+                        <div class="thumbnail"><img src="{{ asset('/images/alejandro-escamilla.jpg') }}"
+                                class="card-img-top" alt="..."></div>
+                        <div class="info">
+                            <h6 class="title">
+                                <span>Learning brand identity design</span>
+                                <small> Ink Yonko</small>
+                            </h6>
+                        </div>
+                    </a>
+                </article>
 
             </div>
-        </main>
 
-        @include('layout.styles')
-    </body>
+            <a href="#" class="btn btn-default text-capitalize px-5 py-3 ">See all</a>
+        </section>
+    </div>
 
-</html>
+    <section for="tutors" class="tutors_section mb-5">
+        <div class="bg-default">
+            <article class="card-body ">
+                <h3 class="text-center font-weight-bold label"> Our Tutors</h3>
+                <div class="wrapper">
+                    <div class="tutor_info">
+                        <img src="{{ asset('/images/alejandro-escamilla.jpg') }}" alt="">
+                        <p class="text-center name">
+                            <span>Gabriel Onyebuolise</span>
+                            <span class="role">Graphics Design Tutor</span>
+                        </p>
+                    </div>
+                    <div class="tutor_info">
+                        <img src="{{ asset('/images/alejandro-escamilla.jpg') }}" alt="">
+                        <p class="text-center name">
+                            <span>Shanks Akagami</span>
+                            <span class="role">Web Design Tutor</span>
+                        </p>
+                    </div>
+                    <div class="tutor_info">
+                        <img src="{{ asset('/images/alejandro-escamilla.jpg') }}" alt="">
+                        <p class="text-center name">
+                            <span>Gol D. Roger</span>
+                            <span class="role">Animation Tutor</span>
+                        </p>
+                    </div>
+                </div>
+                <div class="text-center py-4">
+                    <a href="#" class="btn btn-outline-light text-capitalize px-5 py-3 ">See all Tutors</a>
+                </div>
+            </article>
+        </div>
+    </section>
+
+    <section for="upcoming-events" class=" upcoming_events mb-5">
+        <div class="card-body">
+            <h3 class="text-center text-dark font-weight-bold">Upcoming Events</h3>
+            <div class="event_listing">
+                <article>
+                    <section class="event_detail">
+                        <div class="card-body d-flex flex-column justify-content-between">
+                            <h5 class="event_title">Graphics Design <br> Master Class</h5>
+                            <p class="event_date">Monday, February 28th</p>
+                        </div>
+                    </section>
+                    <img src="{{ asset('/images/alejandro-escamilla.jpg') }}" class="event_img" alt="...">
+                </article>
+
+                <article>
+                    <section class="event_detail">
+                        <div class="card-body d-flex flex-column justify-content-between">
+                            <h5 class="event_title">Zoom <br> Hangout</h5>
+                        </div>
+                    </section>
+                    <img src="{{ asset('/images/alejandro-escamilla.jpg') }}" class="event_img" alt="...">
+                </article>
+
+                <article>
+                    <section class="event_detail">
+                        <div class="card-body d-flex flex-column justify-content-between">
+                            <h5 class="event_title">CH <br> Hangout</h5>
+                        </div>
+                    </section>
+                    <img src="{{ asset('/images/alejandro-escamilla.jpg') }}" class="event_img" alt="...">
+                </article>
+
+                <article>
+                    <section class="event_detail">
+                        <div class="card-body d-flex flex-column justify-content-between">
+                            <h5 class="event_title">Basics of Forex <br> Trading</h5>
+                            <p class="event_date">Monday, March 30th</p>
+                        </div>
+                    </section>
+                    <img src="{{ asset('/images/alejandro-escamilla.jpg') }}" class="event_img" alt="...">
+                </article>
+            </div>
+        </div>
+    </section>
+</main>
+
+@include('partials.footer')
+
+@endsection

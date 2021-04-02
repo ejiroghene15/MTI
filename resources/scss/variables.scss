@@ -1,0 +1,28 @@
+@mixin mq($arg) {
+    @media screen and (max-width: #{$arg}px) {
+        @content;
+    }
+}
+
+@mixin invisible_scrollbar {
+    &::-webkit-scrollbar {
+        width: 0;
+        height: 0;
+    }
+}
+
+@mixin fancy_scrollbar {
+    &::-webkit-scrollbar {
+        background-color: transparent;
+    }
+
+    &::-webkit-scrollbar-thumb {
+        background-color: #ddd;
+        border-radius: 30px;
+    }
+
+    &::-webkit-scrollbar-track {
+        margin: 30vw;
+        border-radius: 30px;
+    }
+}

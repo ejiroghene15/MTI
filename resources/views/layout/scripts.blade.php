@@ -1,6 +1,6 @@
 <!-- Core -->
-<script src="/js/core/jquery.min.js"></script>
-<script src="/js/core/popper.min.js"></script>
-<script src="/js/core/bootstrap.min.js"></script>
+<script src="/js/jquery.min.js"></script>
+<script src="/js/popper.min.js"></script>
+<script src="/js/bootstrap.min.js"></script>
 <!-- Argon JS -->
-<script src="/js/argon-design-system.js"></script>
+<script src="/js/argon-design-system.min.js"></script>

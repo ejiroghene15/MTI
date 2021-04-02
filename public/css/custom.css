@@ -35,36 +35,63 @@
     opacity: 1;
   }
 }
-body *:not(.fa) {
+html {
+  height: 100%;
+}
+
+body {
+  height: 100%;
+}
+body *:not(.fa, .ni) {
   font-family: "Montserrat", sans-serif !important;
 }
 
-.__mti_hero_section {
-  background-image: url(/images/alejandro-escamilla.jpg?48bc5463e34831cf29c41392ba87e2be);
+#page_layout {
+  display: grid;
+  height: 100%;
+  grid-template-rows: -webkit-max-content minmax(-webkit-max-content, 1fr) auto;
+  grid-template-rows: max-content minmax(max-content, 1fr) auto;
+  overflow-y: auto;
+}
+
+#general_nav .navbar-brand {
+  font-size: 1.2em;
+}
+#general_nav .nav-link {
+  font-weight: 600;
+}
+#general_nav .nav-link.nav-link-icon {
+  font-size: 0.9em;
+}
+
+#homepage {
+  background-color: #dddddd59;
+}
+#homepage .hero_section {
+  background-image: url("/images/alejandro-escamilla.jpg");
+  background-attachment: fixed;
   background-repeat: no-repeat;
   background-size: 100% 120vh;
-  background-position: 0% 50%;
-  min-height: 86.7vh;
+  min-height: 89vh;
   position: relative;
   display: flex;
   flex-wrap: wrap;
   align-items: center;
 }
-.__mti_hero_section::before {
-  background-color: #0e0e0ee0;
-  -webkit-backdrop-filter: blur(2px);
-          backdrop-filter: blur(2px);
+#homepage .hero_section::before {
+  background-color: #0e0e0eb0;
   position: absolute;
   height: 100%;
   width: 100%;
   left: 0;
   content: "";
 }
-.__mti_hero_section .__mti_hero_section_intro {
+#homepage .hero_section .section_intro {
   align-self: center;
   position: relative;
-  top: 50px;
-  padding: 0 2em;
+  top: 70px;
+  margin-bottom: 100px;
+  padding: 0 3vmax;
   -webkit-animation-duration: 2s;
           animation-duration: 2s;
   -webkit-animation-name: intro_fade;
@@ -73,22 +100,23 @@ body *:not(.fa) {
           animation-fill-mode: forwards;
   opacity: 0;
 }
-.__mti_hero_section .__mti_hero_section_intro > h2 {
+#homepage .hero_section .section_intro > .main_text {
   color: whitesmoke;
-  font-size: 3em;
+  font-size: clamp(8vmin, 10vmin, 8vmin);
   font-weight: 800;
   margin: 0;
-  line-height: 1.5em;
+  line-height: 1.4em;
+  margin-bottom: 10px;
 }
-.__mti_hero_section .__mti_hero_section_intro > a.btn {
+#homepage .hero_section .section_intro > a.btn {
   margin-top: 20px;
   font-size: 1em !important;
   padding: 1em 2em !important;
 }
-.__mti_hero_section #scroll-down {
+#homepage .hero_section #scroll-down {
+  flex-basis: 100%;
+  text-align: center;
   position: relative;
-  align-self: flex-end;
-  margin: 0 auto;
   -webkit-animation-name: bouncing_arrow;
           animation-name: bouncing_arrow;
   -webkit-animation-duration: 0.6s;
@@ -99,9 +127,11 @@ body *:not(.fa) {
           animation-direction: alternate;
   -webkit-animation-fill-mode: forwards;
           animation-fill-mode: forwards;
-  top: -30px;
+  margin-bottom: 3em;
+  top: 30px;
 }
-.__mti_hero_section #scroll-down .__mit_bouncing_arrow {
+#homepage .hero_section #scroll-down .bouncing_arrow {
+  margin: auto;
   height: 50px;
   width: 50px;
   display: flex;
@@ -110,8 +140,588 @@ body *:not(.fa) {
   border-radius: 50%;
   background-color: whitesmoke;
 }
-.__mti_hero_section #scroll-down .__mit_bouncing_arrow > i {
+#homepage .hero_section #scroll-down .bouncing_arrow > i {
   position: relative;
   top: 2px;
   font-size: 1.2em;
+}
+#homepage .blog {
+  overflow-x: auto;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: repeat(1, 180px);
+  gap: 2em;
+  padding-bottom: 30px;
+}
+#homepage .blog::-webkit-scrollbar {
+  background-color: transparent;
+}
+#homepage .blog::-webkit-scrollbar-thumb {
+  background-color: #ddd;
+  border-radius: 30px;
+}
+#homepage .blog::-webkit-scrollbar-track {
+  margin: 30vw;
+  border-radius: 30px;
+}
+#homepage .blog .blog-post {
+  border-radius: 10px;
+  position: relative;
+  box-shadow: 0px 0px 10px #010d2114;
+  width: 36em;
+}
+#homepage .blog .blog-post .excerpt {
+  height: 100%;
+  display: flex;
+  border: 0;
+}
+#homepage .blog .blog-post .excerpt .thumbnail {
+  flex: 1 1 20vmax;
+}
+#homepage .blog .blog-post .excerpt .thumbnail .card-img-top {
+  border-radius: 5px;
+  height: 100%;
+  width: 100%;
+}
+#homepage .blog .blog-post .excerpt .info {
+  flex: 1 1 30vmax;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  padding: 1em;
+}
+#homepage .blog .blog-post .excerpt .info .title {
+  font-weight: 600;
+}
+#homepage .blog .blog-post .excerpt .info .title span {
+  display: block;
+  font-size: 1.2em;
+  white-space: break-spaces;
+  margin-bottom: 10px;
+}
+#homepage .blog .blog-post .excerpt .info .title small {
+  font-size: 1em;
+  font-weight: 500;
+}
+#homepage .tutors_section {
+  height: auto;
+}
+#homepage .tutors_section .label {
+  color: #fff;
+  margin-bottom: 1em;
+}
+#homepage .tutors_section .wrapper {
+  padding: 1em 0 1em;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: auto;
+}
+#homepage .tutors_section .wrapper::-webkit-scrollbar {
+  background-color: transparent;
+}
+#homepage .tutors_section .wrapper::-webkit-scrollbar-thumb {
+  background-color: #ddd;
+  border-radius: 30px;
+}
+#homepage .tutors_section .wrapper::-webkit-scrollbar-track {
+  margin: 30vw;
+  border-radius: 30px;
+}
+@media screen and (max-width: 700px) {
+  #homepage .tutors_section .wrapper {
+    justify-content: start;
+  }
+}
+#homepage .tutors_section .wrapper .tutor_info {
+  padding: 0 2em;
+}
+#homepage .tutors_section .wrapper .tutor_info img {
+  border-radius: 50%;
+  width: 250px;
+  height: 250px;
+  box-shadow: 0px 0px 3px 3px #476cab47, -2px -2px 2px 2px #172b4d;
+}
+@media screen and (max-width: 768px) {
+  #homepage .tutors_section .wrapper .tutor_info img {
+    height: 200px !important;
+    width: 200px !important;
+  }
+}
+#homepage .tutors_section .wrapper .tutor_info:first-of-type img, #homepage .tutors_section .wrapper .tutor_info:last-of-type img {
+  width: 150px;
+  height: 150px;
+}
+#homepage .tutors_section .wrapper .tutor_info .name {
+  color: #fff;
+  padding-top: 10px;
+  font-weight: bold;
+}
+#homepage .tutors_section .wrapper .tutor_info .name .role {
+  display: block;
+  line-height: 2em;
+  font-size: 14px;
+  font-weight: normal;
+}
+#homepage .upcoming_events {
+  padding: 0 5vmax;
+}
+@media screen and (max-width: 768px) {
+  #homepage .upcoming_events {
+    padding: 0 1vmax;
+  }
+}
+#homepage .upcoming_events .event_listing {
+  margin-top: 1em;
+  display: flex;
+  gap: 1.2em;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+#homepage .upcoming_events .event_listing article {
+  position: relative;
+  height: 250px;
+  overflow: hidden;
+  border-radius: 5px;
+  flex: 1 0 0;
+}
+#homepage .upcoming_events .event_listing article:nth-of-type(1), #homepage .upcoming_events .event_listing article:nth-child(4) {
+  min-width: 60%;
+}
+#homepage .upcoming_events .event_listing article:nth-of-type(2), #homepage .upcoming_events .event_listing article:nth-child(3) {
+  min-width: 28%;
+}
+@media screen and (max-width: 768px) {
+  #homepage .upcoming_events .event_listing article:nth-of-type(2), #homepage .upcoming_events .event_listing article:nth-child(3) {
+    min-width: 100%;
+  }
+}
+#homepage .upcoming_events .event_listing article .event_detail {
+  display: flex;
+  background-color: #010d219e;
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  left: 0;
+  top: 0;
+  content: "";
+  color: #fff;
+  z-index: 4;
+}
+#homepage .upcoming_events .event_listing article .event_detail .event_title {
+  font-size: 2em;
+  font-weight: bold;
+  color: #fff;
+  line-height: 1.4em;
+}
+#homepage .upcoming_events .event_listing article .event_detail .event_date {
+  font-weight: 500;
+  font-size: 1em;
+  color: #fff;
+}
+#homepage .upcoming_events .event_listing article .event_img {
+  border-radius: 5px;
+  width: 100%;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+
+#course_page .banner {
+  position: relative;
+  height: 500px;
+}
+#course_page .banner::before {
+  background-color: #0e0e0e9e;
+  -webkit-backdrop-filter: blur(2px);
+          backdrop-filter: blur(2px);
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  left: 0;
+  content: "";
+}
+#course_page .banner img {
+  height: 100%;
+  width: 100%;
+  margin: auto;
+  display: block;
+}
+#course_page .about_course {
+  position: relative;
+  top: -30vh;
+  gap: 2em;
+}
+#course_page .about_course > .course_title {
+  font-weight: 600;
+  color: white;
+  line-height: 2em;
+  font-size: 3em;
+  text-align: center;
+}
+#course_page .about_course > article {
+  padding: 2em;
+  margin: 0 3em;
+  border-radius: 5px;
+  box-shadow: 0px 0px 10px #010d2114;
+  background-color: white;
+  display: flex;
+  -moz-column-gap: 2em;
+       column-gap: 2em;
+  justify-content: space-between;
+}
+#course_page .about_course > article > article {
+  flex-basis: 68%;
+}
+#course_page .about_course > article > article .excerpt label {
+  font-weight: 600;
+  font-size: 1.2em;
+  text-transform: capitalize;
+}
+#course_page .about_course > article > article .excerpt article {
+  font-size: 15px;
+  line-height: 1.8em;
+}
+#course_page .about_course > article > aside {
+  flex-basis: auto;
+}
+#course_page .about_course > article > aside label {
+  font-weight: 600;
+  font-size: 1.3rem;
+}
+#course_page .about_course > article > aside .tutor_info {
+  border-radius: 5px;
+  box-shadow: 0px 2px 10px #25262914;
+}
+#course_page .about_course > article > aside .tutor_info img {
+  height: 250px;
+  width: 300px;
+  border-radius: 5px 5px 0 0;
+  display: block;
+}
+#course_page .about_course > article > aside .tutor_info .name {
+  font-weight: 600;
+}
+#course_page .about_course > article > aside .tutor_info .role {
+  font-size: 14px;
+  display: block;
+  line-height: 1.5em;
+}
+
+#our_team {
+  padding: 2em;
+  background-image: url("/images/team.jpg");
+  background-size: 100% 100%;
+  background-attachment: fixed;
+}
+#our_team .grids {
+  display: grid;
+  grid-auto-rows: 50px;
+  gap: 3em;
+  justify-content: center;
+}
+#our_team .grids > article {
+  height: 220px;
+  width: 300px;
+  background-color: red;
+  border-radius: 5px 5px 0px 0px;
+}
+#our_team .grids > article > div {
+  border-radius: 0px 0px 5px 5px;
+  padding: 0.4em;
+  color: white !important;
+}
+#our_team .grids > article > div span {
+  display: block;
+}
+#our_team .grids > article > div span.name {
+  font-weight: 600;
+  font-size: 15px;
+}
+#our_team .grids > article > div span.role {
+  font-weight: normal;
+  font-size: 13px;
+}
+#our_team .grids > article > img {
+  border-radius: 5px 5px 0px 0px;
+  width: 100%;
+  height: 100%;
+}
+#our_team .grids > article:nth-of-type(1) {
+  grid-column: 1/2;
+}
+#our_team .grids > article:nth-of-type(2) {
+  grid-column: 3/4;
+  grid-row: 4;
+}
+#our_team .grids > article:nth-of-type(3) {
+  background-color: goldenrod;
+  grid-column: 5/6;
+}
+#our_team .grids > article:nth-of-type(4) {
+  grid-column: 1/2;
+  grid-row: 7/12;
+}
+#our_team .grids > article:nth-of-type(5) {
+  grid-column: 5/6;
+  grid-row: 7/12;
+}
+
+#bio section.bg {
+  background: url("/images/bio-bg.jpg");
+  height: 300px;
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  position: relative;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+}
+#bio section.bg > div {
+  position: relative;
+  text-align: center;
+  top: 70px;
+  z-index: 4;
+}
+#bio section.bg > div p {
+  color: white;
+  font-weight: 600;
+  font-size: 1.5em;
+}
+#bio section.bg > div img {
+  height: 150px;
+  width: 150px;
+  border-radius: 50%;
+}
+#bio section.bg::after {
+  position: absolute;
+  content: "";
+  height: 100%;
+  width: 100%;
+  top: 0;
+  left: 0;
+  background-color: #010d219e;
+}
+#bio .bio_info {
+  margin-top: 80px;
+  padding: 2em;
+  display: flex;
+  gap: 2em;
+}
+#bio .bio_info > article {
+  flex-basis: 65%;
+}
+#bio .bio_info > article .excerpt {
+  border-radius: 5px;
+  padding: 1em;
+  box-shadow: 0px 1px 5px 1px #010d211a;
+}
+#bio .bio_info > article .excerpt label {
+  font-size: 18px;
+  font-weight: 600;
+}
+#bio .bio_info > article .excerpt article {
+  font-size: 15px;
+  line-height: 1.8em;
+}
+#bio .bio_info > aside {
+  flex: 1 1 auto;
+}
+#bio .bio_info > aside > label {
+  font-weight: 600;
+  font-size: 1.5em;
+}
+#bio .bio_info > aside > .tutor_info {
+  display: flex;
+  align-items: center;
+  -moz-column-gap: 1.5em;
+       column-gap: 1.5em;
+  background: #172b4d;
+  border-radius: 0px 7px 7px 0px;
+}
+#bio .bio_info > aside > .tutor_info img {
+  height: 120px;
+  width: 140px;
+}
+#bio .bio_info > aside > .tutor_info p span {
+  display: block;
+}
+#bio .bio_info > aside > .tutor_info p span.name {
+  font-weight: 600;
+}
+#bio .bio_info > aside > .tutor_info p span.role {
+  font-size: 14px;
+}
+
+#library {
+  background: url("/images/library-bg.jpg");
+  background-size: 100%;
+  background-repeat: no-repeat;
+  background-position: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+#library > div {
+  padding: 1em 2em;
+  background-color: #fff;
+  opacity: 0.7;
+  border-radius: 5px;
+}
+#library > div > h5 {
+  background: url("/images/library-bg.jpg");
+  background-size: 100%;
+  background-position: center;
+  font-size: 4em;
+  font-weight: 600;
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+  line-height: 1.2em;
+  padding: 20px;
+  text-align: center;
+}
+#library > div > h5 label {
+  font-size: 0.5em;
+  line-height: 0;
+}
+
+#tutors_page > article {
+  padding: 2em;
+}
+#tutors_page > article h3 {
+  font-weight: 600;
+}
+#tutors_page > article .excerpt {
+  line-height: 2em;
+}
+#tutors_page > article .tutor_images {
+  margin: 3em 0;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.5em;
+}
+#tutors_page > article .tutor_images > .tt_card {
+  position: relative;
+  box-shadow: 0px 0px 10px #010d2114;
+  border-radius: 5px;
+  height: 250px;
+  overflow: hidden;
+}
+#tutors_page > article .tutor_images > .tt_card .tt_card_img img {
+  height: 100%;
+  width: 100%;
+  display: block;
+  border-radius: 5px;
+}
+#tutors_page > article .tutor_images > .tt_card .card_label {
+  position: absolute;
+  width: 100%;
+  padding: 0.7em;
+  bottom: 0;
+  background-color: #172b4d;
+}
+#tutors_page > article .tutor_images > .tt_card .card_label span {
+  color: #ddd;
+  display: block;
+}
+#tutors_page > article .tutor_images > .tt_card .card_label span.name {
+  font-weight: 600;
+  font-size: 15px;
+}
+#tutors_page > article .tutor_images > .tt_card .card_label span.role {
+  font-size: 13px;
+}
+
+#registration_page,
+#login_page {
+  position: relative;
+  background: url("/images/alejandro-escamilla.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: 100% 120vh;
+}
+#registration_page::before,
+#login_page::before {
+  background-color: #0e0e0eb0;
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  left: 0;
+  content: "";
+}
+#registration_page form,
+#login_page form {
+  position: relative;
+  width: min(100%, 50vmax);
+  margin: 5em auto;
+}
+#registration_page form label,
+#login_page form label {
+  font-weight: 600;
+}
+#registration_page form .form-wrapper,
+#login_page form .form-wrapper {
+  background-color: #f4f5f7;
+  border-radius: 5px;
+  padding: 1.5em;
+}
+#registration_page form .form-wrapper header,
+#login_page form .form-wrapper header {
+  font-size: 1.5em;
+  font-weight: 600;
+  padding: 0 0 1em;
+  text-transform: capitalize;
+}
+#registration_page form .form-wrapper .form-error,
+#login_page form .form-wrapper .form-error {
+  font-size: 13px;
+  font-weight: 600;
+  color: #f5365cc7;
+}
+#registration_page form .form-wrapper .form-control,
+#login_page form .form-wrapper .form-control {
+  font-weight: 600;
+  font-size: 14px;
+}
+
+#general_footer nav a {
+  color: #fff;
+  margin: 0 10px;
+  font-size: 14px;
+}
+#general_footer .social img {
+  height: 30px;
+  width: 30px;
+  margin-left: -10px;
+}
+
+@media screen and (max-width: 768px) {
+  #homepage .hero_section {
+    background-size: 100% 80%;
+    min-height: 63vh;
+  }
+  #homepage .hero_section .section_intro .main_text {
+    font-size: 2.5em;
+  }
+  #homepage .hero_section .section_intro .sub_text {
+    font-size: 1.3em;
+  }
+  #homepage .hero_section #scroll-down {
+    display: none;
+  }
+
+  #general_footer nav {
+    flex-wrap: wrap;
+    text-align: center;
+  }
+  #general_footer nav span {
+    flex-basis: 100%;
+    line-height: 2.8em;
+  }
+}
+@media screen and (max-width: 480px) {
+  #homepage .hero_section {
+    background-size: cover;
+  }
 }
