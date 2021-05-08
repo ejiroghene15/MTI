@@ -37,6 +37,7 @@
 }
 html {
   height: 100%;
+  scroll-behavior: smooth;
 }
 
 body {
@@ -44,6 +45,32 @@ body {
 }
 body *:not(.fa, .ni) {
   font-family: "Montserrat", sans-serif !important;
+}
+
+@media screen and (max-width: 768px) {
+  .sections:is(.container, .container-fluid) {
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+  }
+  .sections:is(.container, .container-fluid) > .card-body {
+    padding-left: 10px !important;
+    padding-right: 10px !important;
+  }
+}
+
+.course-menu section {
+  max-height: 200px;
+  overflow-y: scroll;
+}
+.course-menu section::-webkit-scrollbar {
+  width: 10px;
+}
+.course-menu section::-webkit-scrollbar-track {
+  margin: 10px 0;
+}
+.course-menu section::-webkit-scrollbar-thumb {
+  background: rgba(23, 43, 77, 0.816);
+  border-radius: 30px 0 0 30px;
 }
 
 #page_layout {
@@ -54,21 +81,33 @@ body *:not(.fa, .ni) {
   overflow-y: auto;
 }
 
-#general_nav .navbar-brand {
+#main_header {
+  position: -webkit-sticky;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+#main_header #general_nav .navbar-brand {
   font-size: 1.2em;
 }
-#general_nav .nav-link {
+#main_header #general_nav .navbar-brand img {
+  height: 50px;
+}
+#main_header #general_nav .nav-link {
   font-weight: 600;
 }
-#general_nav .nav-link.nav-link-icon {
+#main_header #general_nav .nav-link.nav-link-icon {
   font-size: 0.9em;
+}
+#main_header #general_nav .navbar-collapse .collapse-brand img {
+  height: 45px;
 }
 
 #homepage {
   background-color: #dddddd59;
 }
 #homepage .hero_section {
-  background-image: url("/images/alejandro-escamilla.jpg");
+  background-image: url("https://res.cloudinary.com/https-midastouchacademy-com/image/upload/v1618726423/mti_primary_img.jpg");
   background-attachment: fixed;
   background-repeat: no-repeat;
   background-size: 100% 120vh;
@@ -107,6 +146,18 @@ body *:not(.fa, .ni) {
   margin: 0;
   line-height: 1.4em;
   margin-bottom: 10px;
+}
+#homepage .hero_section .section_intro > .sub_text {
+  width: 50ch;
+  word-break: break-word;
+  font-size: 20px;
+  line-height: 2em;
+  font-weight: 600;
+}
+@media screen and (max-width: 650px) {
+  #homepage .hero_section .section_intro > .sub_text {
+    width: auto;
+  }
 }
 #homepage .hero_section .section_intro > a.btn {
   margin-top: 20px;
@@ -147,10 +198,9 @@ body *:not(.fa, .ni) {
 }
 #homepage .blog {
   overflow-x: auto;
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  grid-template-rows: repeat(1, 180px);
-  gap: 2em;
+  display: flex;
+  flex-wrap: nowrap;
+  gap: 1em;
   padding-bottom: 30px;
 }
 #homepage .blog::-webkit-scrollbar {
@@ -168,40 +218,41 @@ body *:not(.fa, .ni) {
   border-radius: 10px;
   position: relative;
   box-shadow: 0px 0px 10px #010d2114;
-  width: 36em;
+  flex-grow: 1;
+  height: 150px;
 }
 #homepage .blog .blog-post .excerpt {
-  height: 100%;
   display: flex;
+  flex-wrap: nowrap;
+  width: 36em;
   border: 0;
+  overflow: hidden;
 }
 #homepage .blog .blog-post .excerpt .thumbnail {
-  flex: 1 1 20vmax;
+  width: 200px;
+  height: 150px;
 }
 #homepage .blog .blog-post .excerpt .thumbnail .card-img-top {
   border-radius: 5px;
-  height: 100%;
-  width: 100%;
+  height: 150px;
+  width: 200px;
 }
 #homepage .blog .blog-post .excerpt .info {
-  flex: 1 1 30vmax;
   display: flex;
   flex-direction: column;
-  justify-content: space-around;
+  justify-content: space-between;
   padding: 1em;
 }
 #homepage .blog .blog-post .excerpt .info .title {
+  display: block;
+  font-size: 1.1em;
+  margin-bottom: 10px;
   font-weight: 600;
 }
-#homepage .blog .blog-post .excerpt .info .title span {
-  display: block;
-  font-size: 1.2em;
-  white-space: break-spaces;
-  margin-bottom: 10px;
-}
-#homepage .blog .blog-post .excerpt .info .title small {
-  font-size: 1em;
-  font-weight: 500;
+#homepage .blog .blog-post .excerpt .info small {
+  font-size: 0.9em;
+  font-weight: 600;
+  color: #172b4d9c;
 }
 #homepage .tutors_section {
   height: auto;
@@ -235,6 +286,7 @@ body *:not(.fa, .ni) {
 }
 #homepage .tutors_section .wrapper .tutor_info {
   padding: 0 2em;
+  text-align: center;
 }
 #homepage .tutors_section .wrapper .tutor_info img {
   border-radius: 50%;
@@ -249,8 +301,8 @@ body *:not(.fa, .ni) {
   }
 }
 #homepage .tutors_section .wrapper .tutor_info:first-of-type img, #homepage .tutors_section .wrapper .tutor_info:last-of-type img {
-  width: 150px;
-  height: 150px;
+  width: 180px;
+  height: 180px;
 }
 #homepage .tutors_section .wrapper .tutor_info .name {
   color: #fff;
@@ -272,95 +324,77 @@ body *:not(.fa, .ni) {
   }
 }
 #homepage .upcoming_events .event_listing {
-  margin-top: 1em;
-  display: flex;
-  gap: 1.2em;
-  flex-wrap: wrap;
-  justify-content: center;
+  margin: 1em auto 0;
+  width: 90%;
 }
-#homepage .upcoming_events .event_listing article {
-  position: relative;
-  height: 250px;
-  overflow: hidden;
-  border-radius: 5px;
-  flex: 1 0 0;
+#homepage .upcoming_events .event_listing .carousel-inner {
+  height: 400px;
 }
-#homepage .upcoming_events .event_listing article:nth-of-type(1), #homepage .upcoming_events .event_listing article:nth-child(4) {
-  min-width: 60%;
-}
-#homepage .upcoming_events .event_listing article:nth-of-type(2), #homepage .upcoming_events .event_listing article:nth-child(3) {
-  min-width: 28%;
-}
-@media screen and (max-width: 768px) {
-  #homepage .upcoming_events .event_listing article:nth-of-type(2), #homepage .upcoming_events .event_listing article:nth-child(3) {
-    min-width: 100%;
-  }
-}
-#homepage .upcoming_events .event_listing article .event_detail {
-  display: flex;
-  background-color: #010d219e;
-  position: absolute;
-  height: 100%;
-  width: 100%;
-  left: 0;
-  top: 0;
-  content: "";
-  color: #fff;
-  z-index: 4;
-}
-#homepage .upcoming_events .event_listing article .event_detail .event_title {
-  font-size: 2em;
-  font-weight: bold;
-  color: #fff;
-  line-height: 1.4em;
-}
-#homepage .upcoming_events .event_listing article .event_detail .event_date {
-  font-weight: 500;
-  font-size: 1em;
-  color: #fff;
-}
-#homepage .upcoming_events .event_listing article .event_img {
-  border-radius: 5px;
+#homepage .upcoming_events .event_listing .carousel-inner .carousel-item img {
+  height: 400px;
   width: 100%;
   -o-object-fit: cover;
      object-fit: cover;
 }
+@media screen and (max-width: 768px) {
+  #homepage .upcoming_events .event_listing .carousel-inner {
+    height: 300px;
+  }
+  #homepage .upcoming_events .event_listing .carousel-inner .carousel-item img {
+    height: 300px;
+  }
+}
 
+#course_page {
+  padding: 0 4vw;
+}
 #course_page .banner {
+  border-radius: 5px;
   position: relative;
-  height: 500px;
+  height: 300px;
 }
 #course_page .banner::before {
   background-color: #0e0e0e9e;
-  -webkit-backdrop-filter: blur(2px);
-          backdrop-filter: blur(2px);
   position: absolute;
   height: 100%;
   width: 100%;
   left: 0;
   content: "";
+  border-radius: 0 0 7px 7px;
 }
 #course_page .banner img {
   height: 100%;
   width: 100%;
+  -o-object-fit: cover;
+     object-fit: cover;
   margin: auto;
   display: block;
+  border-radius: 5px;
 }
 #course_page .about_course {
   position: relative;
-  top: -30vh;
+  margin-top: -35vh;
+  margin-bottom: 5em;
   gap: 2em;
 }
 #course_page .about_course > .course_title {
   font-weight: 600;
   color: white;
   line-height: 2em;
-  font-size: 3em;
-  text-align: center;
+  font-size: 2em;
+  margin-bottom: 0;
+}
+#course_page .about_course > small.excerpt {
+  color: #ddd;
+  font-weight: 600;
+  display: block;
+  font-size: 0.8em;
+  margin-bottom: 25px;
+  width: 70%;
+  line-height: 2em;
 }
 #course_page .about_course > article {
   padding: 2em;
-  margin: 0 3em;
   border-radius: 5px;
   box-shadow: 0px 0px 10px #010d2114;
   background-color: white;
@@ -368,6 +402,11 @@ body *:not(.fa, .ni) {
   -moz-column-gap: 2em;
        column-gap: 2em;
   justify-content: space-between;
+}
+@media screen and (max-width: 800px) {
+  #course_page .about_course > article {
+    flex-direction: column;
+  }
 }
 #course_page .about_course > article > article {
   flex-basis: 68%;
@@ -391,83 +430,332 @@ body *:not(.fa, .ni) {
 #course_page .about_course > article > aside .tutor_info {
   border-radius: 5px;
   box-shadow: 0px 2px 10px #25262914;
+  width: 300px;
 }
 #course_page .about_course > article > aside .tutor_info img {
-  height: 250px;
+  height: 240px;
   width: 300px;
   border-radius: 5px 5px 0 0;
   display: block;
+  -o-object-fit: cover;
+     object-fit: cover;
 }
-#course_page .about_course > article > aside .tutor_info .name {
+#course_page .about_course > article > aside .tutor_info p {
+  background-color: #172b4d;
+  color: #dddddd;
+  border-radius: 0 0 5px 5px;
+}
+#course_page .about_course > article > aside .tutor_info p .name {
   font-weight: 600;
+  font-size: 15px;
 }
-#course_page .about_course > article > aside .tutor_info .role {
+#course_page .about_course > article > aside .tutor_info p .role {
   font-size: 14px;
   display: block;
   line-height: 1.5em;
 }
-
-#our_team {
-  padding: 2em;
-  background-image: url("/images/team.jpg");
-  background-size: 100% 100%;
-  background-attachment: fixed;
+#course_page #more_courses {
+  margin-bottom: 5em;
 }
-#our_team .grids {
-  display: grid;
-  grid-auto-rows: 50px;
-  gap: 3em;
-  justify-content: center;
-}
-#our_team .grids > article {
-  height: 220px;
-  width: 300px;
-  background-color: red;
-  border-radius: 5px 5px 0px 0px;
-}
-#our_team .grids > article > div {
-  border-radius: 0px 0px 5px 5px;
-  padding: 0.4em;
-  color: white !important;
-}
-#our_team .grids > article > div span {
-  display: block;
-}
-#our_team .grids > article > div span.name {
+#course_page #more_courses header {
   font-weight: 600;
-  font-size: 15px;
+  font-size: 1.5em;
+  margin-bottom: 1em;
 }
-#our_team .grids > article > div span.role {
-  font-weight: normal;
-  font-size: 13px;
+#course_page #more_courses > section {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  -moz-column-gap: 1.5em;
+       column-gap: 1.5em;
+  row-gap: 3em;
 }
-#our_team .grids > article > img {
-  border-radius: 5px 5px 0px 0px;
+@media screen and (max-width: 800px) {
+  #course_page #more_courses > section {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+@media screen and (max-width: 480px) {
+  #course_page #more_courses > section {
+    grid-template-columns: 1fr;
+  }
+}
+#course_page #more_courses > section > article {
+  border-radius: 5px;
+  box-shadow: 0px 0px 10px #010d2114;
+}
+#course_page #more_courses > section > article header {
+  font-size: 1.2em;
+  padding: 10px;
+  font-weight: 600;
+  font-size: 1em;
+  color: #172b4da1;
+}
+#course_page #more_courses > section > article .image {
+  height: 180px;
+  overflow: hidden;
+}
+#course_page #more_courses > section > article .image img {
+  transition: 0.3s;
   width: 100%;
   height: 100%;
+  -o-object-fit: cover;
+     object-fit: cover;
 }
-#our_team .grids > article:nth-of-type(1) {
-  grid-column: 1/2;
+#course_page #more_courses > section > article .image img:hover {
+  transform: scale(1.1);
 }
-#our_team .grids > article:nth-of-type(2) {
-  grid-column: 3/4;
-  grid-row: 4;
+#course_page #more_courses > section > article footer {
+  display: flex;
+  align-items: center;
+  padding: 10px;
 }
-#our_team .grids > article:nth-of-type(3) {
-  background-color: goldenrod;
-  grid-column: 5/6;
+#course_page #more_courses > section > article footer span {
+  font-weight: 600;
 }
-#our_team .grids > article:nth-of-type(4) {
-  grid-column: 1/2;
-  grid-row: 7/12;
+#course_page #more_courses > section > article footer span img {
+  height: 58px;
+  width: 58px;
+  -o-object-fit: cover;
+     object-fit: cover;
 }
-#our_team .grids > article:nth-of-type(5) {
-  grid-column: 5/6;
-  grid-row: 7/12;
+#course_page #more_courses > section > article footer span.tutor {
+  color: #172b4d;
+  display: inline-block;
+  padding: 0 10px;
+  font-size: 15px;
+  vertical-align: middle;
+}
+#course_page #more_courses > section > article footer span.role {
+  display: block;
+  font-size: 13px;
+  color: #010d2180;
+  padding: 0 10px;
+}
+@media screen and (max-width: 768px) {
+  #course_page {
+    padding: 0;
+  }
+  #course_page .banner {
+    height: 400px;
+  }
+  #course_page .about_course > .course_title {
+    line-height: 1.5em;
+  }
+  #course_page .about_course small.excerpt {
+    width: 100%;
+  }
+}
+@media screen and (max-width: 400px) {
+  #course_page .about_course > article {
+    padding: 1.5em;
+  }
+  #course_page .about_course > article .tutor_info {
+    width: 100% !important;
+  }
+  #course_page .about_course > article .tutor_info img {
+    width: 100% !important;
+    height: 220px !important;
+  }
+}
+
+#courses_all {
+  padding: 0 4vw;
+}
+#courses_all .banner {
+  border-radius: 5px;
+  position: relative;
+  height: 200px;
+}
+#courses_all .banner::before {
+  background-color: #0e0e0e9e;
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  left: 0;
+  content: "";
+  border-radius: 0 0 7px 7px;
+}
+#courses_all .banner img {
+  height: 100%;
+  width: 100%;
+  -o-object-fit: cover;
+     object-fit: cover;
+  margin: auto;
+  display: block;
+  border-radius: 5px;
+}
+#courses_all .banner p {
+  position: relative;
+  top: -110px;
+  left: 20px;
+  color: #fff;
+  font-weight: 600;
+  margin-bottom: 0;
+  font-size: 2em;
+}
+@media screen and (max-width: 480px) {
+  #courses_all .banner p {
+    left: 0;
+    font-size: 1.5em;
+    padding: 0 15px;
+  }
+}
+#courses_all .banner p.small {
+  font-size: 14px;
+}
+#courses_all #courses {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  -moz-column-gap: 1.5em;
+       column-gap: 1.5em;
+  row-gap: 3em;
+  margin: 3em 0 5em;
+}
+@media screen and (max-width: 800px) {
+  #courses_all #courses {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+@media screen and (max-width: 480px) {
+  #courses_all #courses {
+    grid-template-columns: 1fr;
+  }
+}
+#courses_all #courses > article {
+  border-radius: 5px;
+  box-shadow: 0px 0px 10px #010d2114;
+}
+#courses_all #courses > article header {
+  font-size: 1.2em;
+  padding: 10px;
+  font-weight: 600;
+  font-size: 1em;
+  color: #172b4da1;
+}
+#courses_all #courses > article .image {
+  height: 180px;
+  overflow: hidden;
+}
+#courses_all #courses > article .image img {
+  transition: 0.3s;
+  width: 100%;
+  height: 100%;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+#courses_all #courses > article .image img:hover {
+  transform: scale(1.1);
+}
+#courses_all #courses > article footer {
+  display: flex;
+  align-items: center;
+  padding: 10px;
+}
+#courses_all #courses > article footer span {
+  font-weight: 600;
+}
+#courses_all #courses > article footer span img {
+  height: 58px;
+  width: 58px;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+#courses_all #courses > article footer span.tutor {
+  color: #172b4d;
+  display: inline-block;
+  padding: 0 10px;
+  font-size: 15px;
+  vertical-align: middle;
+}
+#courses_all #courses > article footer span.role {
+  display: block;
+  font-size: 13px;
+  color: #010d2180;
+  padding: 0 10px;
+}
+
+#our_team .banner {
+  background-image: url("https://res.cloudinary.com/https-midastouchacademy-com/image/upload/v1619206160/team_bg.jpg");
+  background-size: 100% 100%;
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+  height: 300px;
+  width: 100%;
+  display: table;
+  position: relative;
+}
+#our_team .banner::before {
+  background-color: #0e0e0eb0;
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  left: 0;
+  content: "";
+}
+#our_team .banner .label {
+  padding: 2em;
+  display: table-cell;
+  vertical-align: middle;
+  position: relative;
+  color: white;
+  line-height: 2em;
+}
+@media screen and (max-width: 680px) {
+  #our_team .banner .label {
+    padding: 1em;
+  }
+}
+#our_team .banner .label .big-text {
+  font-size: 2.5em;
+  margin-bottom: 5px;
+  font-weight: 600;
+}
+#our_team .profiles {
+  display: grid;
+  justify-content: center;
+  grid-template-columns: repeat(auto-fill, 300px);
+  justify-content: center;
+  row-gap: 2em;
+  -moz-column-gap: 1em;
+       column-gap: 1em;
+  margin: 5em 2em;
+}
+#our_team .profiles > .tt_card {
+  position: relative;
+  box-shadow: 0px 0px 10px #010d2114;
+  border-radius: 5px;
+  height: 300px;
+  overflow: hidden;
+}
+#our_team .profiles > .tt_card .tt_card_img img {
+  height: 100%;
+  width: 295px;
+  display: block;
+  border-radius: 5px;
+}
+#our_team .profiles > .tt_card .card_label {
+  position: absolute;
+  width: 100%;
+  padding: 0.7em;
+  bottom: 0;
+  background-color: #172b4d;
+  text-align: center;
+}
+#our_team .profiles > .tt_card .card_label span {
+  color: #ddd;
+  display: block;
+}
+#our_team .profiles > .tt_card .card_label span.name {
+  font-weight: 600;
+  font-size: 15px;
+  margin-bottom: 4px;
+}
+#our_team .profiles > .tt_card .card_label span.role {
+  font-size: 13px;
 }
 
 #bio section.bg {
-  background: url("/images/bio-bg.jpg");
+  background: url("https://res.cloudinary.com/https-midastouchacademy-com/image/upload/v1618726433/bio_primary_background.jpg");
   height: 300px;
   background-size: 100% 100%;
   background-repeat: no-repeat;
@@ -502,58 +790,30 @@ body *:not(.fa, .ni) {
   background-color: #010d219e;
 }
 #bio .bio_info {
-  margin-top: 80px;
-  padding: 2em;
+  padding: 0 2em;
+  margin-bottom: 5em;
   display: flex;
   gap: 2em;
 }
 #bio .bio_info > article {
-  flex-basis: 65%;
+  flex-basis: 80%;
+  margin: auto;
+  box-shadow: 0px 1px 5px 1px #010d211a;
+  padding-top: 80px;
 }
 #bio .bio_info > article .excerpt {
   border-radius: 5px;
   padding: 1em;
-  box-shadow: 0px 1px 5px 1px #010d211a;
+  font-size: 15px;
+  line-height: 1.8em;
 }
 #bio .bio_info > article .excerpt label {
   font-size: 18px;
   font-weight: 600;
 }
-#bio .bio_info > article .excerpt article {
-  font-size: 15px;
-  line-height: 1.8em;
-}
-#bio .bio_info > aside {
-  flex: 1 1 auto;
-}
-#bio .bio_info > aside > label {
-  font-weight: 600;
-  font-size: 1.5em;
-}
-#bio .bio_info > aside > .tutor_info {
-  display: flex;
-  align-items: center;
-  -moz-column-gap: 1.5em;
-       column-gap: 1.5em;
-  background: #172b4d;
-  border-radius: 0px 7px 7px 0px;
-}
-#bio .bio_info > aside > .tutor_info img {
-  height: 120px;
-  width: 140px;
-}
-#bio .bio_info > aside > .tutor_info p span {
-  display: block;
-}
-#bio .bio_info > aside > .tutor_info p span.name {
-  font-weight: 600;
-}
-#bio .bio_info > aside > .tutor_info p span.role {
-  font-size: 14px;
-}
 
 #library {
-  background: url("/images/library-bg.jpg");
+  background: url("https://res.cloudinary.com/https-midastouchacademy-com/image/upload/v1618726431/mti_library_bg.jpg");
   background-size: 100%;
   background-repeat: no-repeat;
   background-position: center;
@@ -568,7 +828,7 @@ body *:not(.fa, .ni) {
   border-radius: 5px;
 }
 #library > div > h5 {
-  background: url("/images/library-bg.jpg");
+  background: url("https://res.cloudinary.com/https-midastouchacademy-com/image/upload/v1618726431/mti_library_bg.jpg");
   background-size: 100%;
   background-position: center;
   font-size: 4em;
@@ -584,7 +844,51 @@ body *:not(.fa, .ni) {
   font-size: 0.5em;
   line-height: 0;
 }
+@media screen and (max-width: 768px) {
+  #library {
+    background-size: 100% 100%;
+  }
+  #library > div {
+    margin: 0 1em;
+  }
+  #library > div > h5 {
+    font-size: 3em;
+  }
+}
 
+#tutors_page .banner {
+  padding: 0;
+  background: url("https://res.cloudinary.com/https-midastouchacademy-com/image/upload/v1619218585/tutors_bg.jpg");
+  background-size: 100% 100%;
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+  height: 250px;
+  width: 100%;
+  display: table;
+  position: relative;
+}
+#tutors_page .banner::before {
+  background-color: #0e0e0eb0;
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  left: 0;
+  content: "";
+}
+#tutors_page .banner .label {
+  padding: 2em;
+  text-align: center;
+  display: table-cell;
+  vertical-align: middle;
+  position: relative;
+  color: white;
+  line-height: 2em;
+}
+#tutors_page .banner .label .big-text {
+  font-size: 2.5em;
+  margin-bottom: 5px;
+  font-weight: 600;
+}
 #tutors_page > article {
   padding: 2em;
 }
@@ -593,23 +897,27 @@ body *:not(.fa, .ni) {
 }
 #tutors_page > article .excerpt {
   line-height: 2em;
+  color: rgba(0, 0, 0, 0.693);
 }
 #tutors_page > article .tutor_images {
-  margin: 3em 0;
+  margin: 1.5em auto;
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 1.5em;
+  grid-template-columns: repeat(auto-fill, 300px);
+  justify-content: center;
+  row-gap: 2em;
+  -moz-column-gap: 1em;
+       column-gap: 1em;
 }
 #tutors_page > article .tutor_images > .tt_card {
   position: relative;
   box-shadow: 0px 0px 10px #010d2114;
   border-radius: 5px;
-  height: 250px;
+  height: 300px;
   overflow: hidden;
 }
 #tutors_page > article .tutor_images > .tt_card .tt_card_img img {
   height: 100%;
-  width: 100%;
+  width: 300px;
   display: block;
   border-radius: 5px;
 }
@@ -619,6 +927,7 @@ body *:not(.fa, .ni) {
   padding: 0.7em;
   bottom: 0;
   background-color: #172b4d;
+  text-align: center;
 }
 #tutors_page > article .tutor_images > .tt_card .card_label span {
   color: #ddd;
@@ -627,15 +936,83 @@ body *:not(.fa, .ni) {
 #tutors_page > article .tutor_images > .tt_card .card_label span.name {
   font-weight: 600;
   font-size: 15px;
+  margin-bottom: 4px;
 }
 #tutors_page > article .tutor_images > .tt_card .card_label span.role {
   font-size: 13px;
+}
+@media screen and (max-width: 680px) {
+  #tutors_page > article {
+    padding: 2em 1.5em;
+  }
+  #tutors_page > article h3 {
+    font-size: 1.5em;
+  }
+}
+
+#about_page .banner {
+  background: url("https://res.cloudinary.com/https-midastouchacademy-com/image/upload/v1618998200/mti_about_bg.jpg");
+  background-size: 100% 100%;
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+  height: 250px;
+  width: 100%;
+  display: table;
+  position: relative;
+}
+#about_page .banner::before {
+  background-color: #0e0e0eb0;
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  left: 0;
+  content: "";
+}
+#about_page .banner .label {
+  padding: 2em;
+  text-align: center;
+  display: table-cell;
+  vertical-align: middle;
+  position: relative;
+  color: white;
+  line-height: 2em;
+}
+#about_page .banner .label .big-text {
+  font-size: 2.5em;
+  margin-bottom: 5px;
+  font-weight: 600;
+}
+#about_page > section {
+  position: relative;
+  padding: 2em;
+}
+@media screen and (max-width: 680px) {
+  #about_page > section {
+    padding: 2em 1.5em;
+  }
+}
+#about_page > section.excerpt {
+  margin: auto;
+}
+#about_page > section.excerpt p {
+  line-height: 2em;
+  font-weight: 500;
+  color: rgba(24, 13, 13, 0.652);
+  font-size: 1.1em;
+}
+@media screen and (max-width: 768px) {
+  #about_page > section h3 {
+    font-size: 1.8em;
+  }
+  #about_page > section .excerpt {
+    width: auto;
+  }
 }
 
 #registration_page,
 #login_page {
   position: relative;
-  background: url("/images/alejandro-escamilla.jpg");
+  background: url("https://res.cloudinary.com/https-midastouchacademy-com/image/upload/v1618726423/mti_primary_img.jpg");
   background-size: cover;
   background-repeat: no-repeat;
   background-attachment: fixed;
@@ -650,11 +1027,26 @@ body *:not(.fa, .ni) {
   left: 0;
   content: "";
 }
-#registration_page form,
-#login_page form {
-  position: relative;
+#registration_page > section,
+#login_page > section {
   width: min(100%, 50vmax);
   margin: 5em auto;
+  position: relative;
+}
+@media screen and (max-width: 520px) {
+  #registration_page > section,
+#login_page > section {
+    margin: 5em 0 !important;
+  }
+}
+#registration_page > section .nav-link,
+#login_page > section .nav-link {
+  font-weight: 600;
+  font-size: 1em;
+}
+#registration_page > section .nav-link.active,
+#login_page > section .nav-link.active {
+  background-color: #172b4d;
 }
 #registration_page form label,
 #login_page form label {
@@ -685,10 +1077,14 @@ body *:not(.fa, .ni) {
   font-size: 14px;
 }
 
+#general_footer {
+  border-top: 1px solid rgba(221, 221, 221, 0.268);
+}
 #general_footer nav a {
   color: #fff;
   margin: 0 10px;
   font-size: 14px;
+  white-space: nowrap;
 }
 #general_footer .social img {
   height: 30px;
@@ -698,14 +1094,17 @@ body *:not(.fa, .ni) {
 
 @media screen and (max-width: 768px) {
   #homepage .hero_section {
-    background-size: 100% 80%;
+    background-size: 100% 100%;
     min-height: 63vh;
+  }
+  #homepage .hero_section .section_intro {
+    margin-bottom: 130px;
   }
   #homepage .hero_section .section_intro .main_text {
     font-size: 2.5em;
   }
   #homepage .hero_section .section_intro .sub_text {
-    font-size: 1.3em;
+    font-size: 1.1em;
   }
   #homepage .hero_section #scroll-down {
     display: none;

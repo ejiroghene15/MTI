@@ -1,0 +1,48 @@
+@import "./variables.scss";
+main {
+    &#dashboard {
+        .card-profile-image {
+            z-index: 10;
+            img {
+                transform: translate(-50%, -50%) !important;
+                width: 170px !important;
+                height: 170px !important;
+                padding: 10px;
+                object-fit: cover;
+            }
+        }
+        .section-profile-cover {
+            @media screen and (min-width: 620px) {
+                &::after {
+                    position: absolute;
+                    content: "";
+                    height: 100%;
+                    width: 100%;
+                    top: 0;
+                    left: 0;
+                    background-color: #010d219e;
+                }
+            }
+        }
+        @include mq(520) {
+            .card-profile {
+                margin-top: -40vh !important;
+            }
+            .profile-tab {
+                text-transform: capitalize;
+            }
+        }
+        .form-wrapper {
+            padding: 3vh 3vw 0;
+            @include mq(768) {
+                padding: 0;
+            }
+            background-color: #f4f5f7;
+        }
+        .form-error {
+            font-size: 14px;
+            font-weight: 500;
+            color: #f5365cc7;
+        }
+    }
+}

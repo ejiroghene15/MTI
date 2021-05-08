@@ -1,16 +1,17 @@
 @include mq(768) {
     #homepage {
         .hero_section {
-            background-size: 100% 80%;
+            background-size: 100% 100%;
             min-height: 63vh;
 
             .section_intro {
+                margin-bottom: 130px;
                 .main_text {
                     font-size: 2.5em;
                 }
 
                 .sub_text {
-                    font-size: 1.3em;
+                    font-size: 1.1em;
                 }
             }
 

@@ -1,5 +1,5 @@
 @extends('layout.master')
-@section('title', "Course Information")
+@section('title', "Course - $course->course_title" )
 @section('body')
 
 @include('partials.nav')
@@ -7,74 +7,79 @@
 <main id="course_page">
 
     <section class="banner">
-        <img src="{{ asset('images/stock-market.jpg') }}" alt="">
+        <img src="{{ $course->image ?? asset('images/stock-market.jpg') }}" alt="">
     </section>
 
     <div class="container-fluid">
 
         <section class="about_course">
-            <p class="course_title">Stock Market</p>
+            <p class="course_title">{{ $course->course_title }}</p>
+            <small class="excerpt">{{ $course->excerpt }}</small>
 
             <article>
                 <article>
                     <article class="mb-4 excerpt">
-                        <label for="">About Stock Trading</label>
-                        <article>
-                            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quibusdam, obcaecati. Magnam enim
-                            sint
-                            neque quisquam ipsum possimus rerum. Quod, quidem odio. Atque quidem, fugit minus sit ea
-                            consequuntur hic eveniet.
-                        </article>
-                    </article>
-
-                    <article class="mb-4 excerpt">
                         <label for="">Prospects</label>
                         <article>
-                            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quibusdam, obcaecati. Magnam enim
-                            sint
-                            neque quisquam ipsum possimus rerum. Quod, quidem odio. Atque quidem, fugit minus sit ea
-                            consequuntur hic eveniet.
+                            {{ $course->course_description }}
                         </article>
                     </article>
-
-                    <article class="mb-4 excerpt">
-                        <label for="">Area of course concentration</label>
-                        <article>
-                            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quibusdam, obcaecati. Magnam enim
-                            sint
-                            neque quisquam ipsum possimus rerum. Quod, quidem odio. Atque quidem, fugit minus sit ea
-                            consequuntur hic eveniet.
-                        </article>
-                    </article>
-
-                    <article class="mb-4 excerpt">
-                        <label for="">Get a certification</label>
-                        <article>
-                            <p>
-                                Interested in this course? Register to get started or login with your account, to
-                                proceed to
-                                make payment to unlock this course.
-                            </p>
-
-                        </article>
-                    </article>
-
 
                 </article>
 
+                @if ($course->tutor)
                 <aside>
                     <label for="" class="mb-3">Course Faculty</label>
                     <div class="tutor_info">
-                        <img src="{{ asset('images/stock-market.jpg') }}" alt="">
+                        <img src="{{ asset($course->tutor->picture) }}" alt="">
                         <p class="text-center p-2">
-                            <span class="name">Ada Billions</span>
-                            <span class="role">Stock Broker Expert</span>
+                            <span class="name">{{ $course->tutor->first_name . ' ' .$course->tutor->last_name }}</span>
+                            <span class="role">Instructor</span>
                         </p>
                     </div>
                 </aside>
+                @endif
+
             </article>
         </section>
+
+        <div id="more_courses">
+            <header>Other Courses</header>
+            <section>
+                @foreach ($more as $course)
+                <article>
+                    <a href="{{ route('course_info', $course->slug) }}">
+                        <header>{{ $course->course_title }}</header>
+                        <div class="image">
+                            <img src="{{ $course->image }}" alt="">
+                        </div>
+                        @if ($course->tutor)
+
+                        <footer>
+                            <span class="avatar avatar-lg rounded-circle">
+                                <img src="{{ $course->tutor->image }}" alt=""></span>
+                            <span>
+                                <span class="tutor">
+                                    {{ $course->tutor->first_name . " " . $course->tutor->last_name }}
+                                </span>
+                                <span class="role">
+                                    Instructor
+                                </span>
+                            </span>
+                        </footer>
+                        @endif
+                    </a>
+                </article>
+
+                @endforeach
+
+            </section>
+            <a href="{{ route('courses') }}" class="btn btn-default mt-5">All Courses</a>
+
+        </div>
+
     </div>
+
 
 </main>
 

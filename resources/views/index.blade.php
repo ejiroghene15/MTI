@@ -6,64 +6,189 @@
 <main id="homepage">
     <section class="hero_section">
         <section class="section_intro">
-            <h2 class="main_text"> Midas Touch Academy</h2>
-            <h4 class="text-light sub_text">An online platform for remote learning, skill acquisition and
-                outsourcing.. </h4>
-            <a href="{{ route('register') }}" class="btn btn-default ">Join Academy</a>
+            <h2 class="main_text">Become a Shrewd Professional</h2>
+            <h4 class="text-light sub_text">
+                Learn soft and hard skills from any location in the world. <br> With access to over 100 tutors, we help
+                students achieve mastery of highly sought-after skills.
+            </h4>
+            @auth
+            <a href="{{ route('courses') }}" class="btn btn-default text-capitalize mb-5">Browse Courses</a>
+            @else
+            <a href="{{ route('login') }}" class="btn btn-default text-capitalize mb-5">Join Academy For Free</a>
+            @endauth
         </section>
-        <section id="scroll-down">
-            <a href="" class="bouncing_arrow"><i class="fa fa-chevron-down"></i> </a>
+        <section id="scroll-down" class="d-none">
+            <a href="#tutors" id="scrd" class="bouncing_arrow"><i class="fa fa-chevron-down"></i> </a>
         </section>
     </section>
 
-    <div class="container-fluid">
+    <div class="container-fluid my-5 sections">
+        <div class="card-body">
+            @if ($upcoming)
+            <div class="row">
+                <div class="col-md-8 mx-auto text-center">
+                    <span class="badge badge-primary badge-pill mb-3">Upcoming Class</span>
+                    <h3 class="display-3 mb-0">{{ $upcoming->name }}</h3>
+                    <p class="lead ">
+                        {!! nl2br($upcoming->excerpt) !!}
+                    </p>
+                    <a href="{{ route('event',  $upcoming->link_id) }}" class="btn btn-primary mb-5">View Course
+                        Details</a>
+                </div>
+            </div>
+            @endif
+
+            <div class="row align-items-stretch">
+                <div class="col-md-4 mb-5 ">
+                    <div class="card-body shadow-sm rounded">
+                        <a href="{{ route('courses') }}" class="info text-center d-block">
+                            <div class="icon icon-lg icon-shape icon-shape-primary shadow rounded-circle">
+                                <i class="fa fa-book"></i>
+                            </div>
+                            <h6 class="info-title text-uppercase text-primary">Our courses</h6>
+                            <p class="description opacity-8">
+                                Discover a world of skills and opportunities from tutors and experts
+                            </p>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="col-md-4 mb-5">
+                    <div class="card-body shadow-sm rounded">
+                        <div class="info text-center">
+                            <div class="icon icon-lg icon-shape icon-shape-success shadow rounded-circle">
+                                <i class="fa fa-users"></i>
+                            </div>
+                            <h6 class="info-title text-uppercase text-success">Students' Hangout</h6>
+                            <p class="description opacity-8">
+                                Enjoy free weekend discussions from professionals in different sectors
+                            </p>
+                            <a href="javascript:;" class="text-primary d-none">
+                                <i class="ni ni-bold-right text-primary"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-4 mb-5">
+                    <div class="card-body shadow-sm rounded">
+                        <div class="info text-center">
+                            <div class="icon icon-lg icon-shape icon-shape-warning shadow rounded-circle">
+                                <i class="fa fa-building"></i>
+                            </div>
+                            <h6 class="info-title text-uppercase text-warning">Our Marketplace</h6>
+                            <p class="description opacity-8">
+                                Sell your skills, provide opportunities and get paid for
+                                all your troubles.
+                            </p>
+                            <a href="javascript:;" class="text-primary d-none">
+                                <i class="ni ni-bold-right text-primary"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <section for="tutors" class="tutors_section my-5" id="tutors">
+        <div class="bg-default">
+            <article class="card-body ">
+                <h3 class="text-center font-weight-bold label"> Our Tutors</h3>
+                <div class="wrapper">
+                    <div class="tutor_info">
+                        <img
+                            src="{{ asset('https://res.cloudinary.com/https-midastouchacademy-com/image/upload/v1619188235/tutors/chidinma.jpg') }}" />
+                        <p class="text-center name">
+                            <span>Chidinma Egwuogu</span>
+                            <span class="role">Copywriting/content creation</span>
+                        </p>
+                    </div>
+                    <div class="tutor_info">
+                        <img src="{{ asset('https://res.cloudinary.com/https-midastouchacademy-com/image/upload/v1619178900/tutors/gabriel_olisa.jpg') }}"
+                            alt="">
+                        <p class="text-center name">
+                            <span>Olisa Gabriel</span>
+                            <span class="role">Graphic Design</span>
+                        </p>
+                    </div>
+                    <div class="tutor_info">
+                        <img src="{{ asset('https://res.cloudinary.com/https-midastouchacademy-com/image/upload/v1619178901/tutors/alexander_osagie.jpg') }}"
+                            alt="">
+                        <p class="text-center name">
+                            <span>Osagie Alexander</span>
+                            <span class="role">Video creation and 3D Animation</span>
+                        </p>
+                    </div>
+                </div>
+                <div class="text-center py-4">
+                    <a href="{{route('tutors')}}" class="btn btn-outline-light text-capitalize px-5 py-3 ">See all
+                        Tutors</a>
+                </div>
+            </article>
+        </div>
+    </section>
+
+    <div class="container-fluid my-5 sections">
         <section for="blog-posts" class="card-body my-5">
-            <h4 class="text-dark font-weight-bold">Blog Posts</h4>
+            <h4 class="text-dark font-weight-bold mb-4">Blog Posts</h4>
 
             <div class="blog mb-3">
-
+                @foreach ($blogposts as $post)
                 <article class="blog-post">
-                    <a class="excerpt">
-                        <div class="thumbnail"><img src="{{ asset('/images/alejandro-escamilla.jpg') }}"
+                    <a class="excerpt" href="{{ $post->guid }}" target="_blank">
+                        <div class="thumbnail">
+                            @foreach ($attachment as $image)
+                            @if ($image->post_parent == $post->ID)
+                            <img src="{{ $image->guid }}" class="card-img-top">
+                            @endif
+                            @endforeach
+                        </div>
+                        <div class="info">
+                            <h6 class="title">
+                                <span class="text-capitalize">
+                                    {{ Str::lower($post->post_title) }}
+                                </span>
+                            </h6>
+                            <small> Read Article</small>
+                        </div>
+                    </a>
+                </article>
+                @endforeach
+
+                <article class="blog-post d-none">
+                    <a class="excerpt"
+                        href="https://nairametrics.com/2020/08/17/10-ways-to-save-and-make-more-investments/">
+                        <div class="thumbnail"><img
+                                src="{{ asset('https://res.cloudinary.com/https-midastouchacademy-com/image/upload/v1618859759/events/savers_or_borrowers.jpg') }}"
                                 class="card-img-top" alt="..."></div>
                         <div class="info">
                             <h6 class="title">
-                                <span>Learn the rudiments of Fashion Design</span>
-                                <small> Shade's Attires</small>
+                                <span>10 ways to save and make more investments </span>
+                                <small class="d-none"> Gabriel Pexel</small>
                             </h6>
                         </div>
                     </a>
                 </article>
 
-                <article class="blog-post">
+                <article class="blog-post d-none">
                     <a class="excerpt">
-                        <div class="thumbnail"><img src="{{ asset('/images/alejandro-escamilla.jpg') }}"
+                        <div class="thumbnail">
+                            <img src="{{ asset('https://res.cloudinary.com/https-midastouchacademy-com/image/upload/v1618859758/events/fintechs_n_banks.jpg') }}"
                                 class="card-img-top" alt="..."></div>
                         <div class="info">
                             <h6 class="title">
-                                <span>Collaborating with various designers</span>
-                                <small> Gabriel Pexel</small>
+                                <span>How Tech Giants Make Their Billions</span>
+                                <small class="d-none"> Cecil Palms</small>
                             </h6>
                         </div>
                     </a>
                 </article>
 
-                <article class="blog-post">
+                <article class="blog-post d-none">
                     <a class="excerpt">
-                        <div class="thumbnail"><img src="{{ asset('/images/alejandro-escamilla.jpg') }}"
-                                class="card-img-top" alt="..."></div>
-                        <div class="info">
-                            <h6 class="title">
-                                <span>How ointments made me millions</span>
-                                <small> Cecil Palms</small>
-                            </h6>
-                        </div>
-                    </a>
-                </article>
-
-                <article class="blog-post">
-                    <a class="excerpt">
-                        <div class="thumbnail"><img src="{{ asset('/images/alejandro-escamilla.jpg') }}"
+                        <div class="thumbnail"><img
+                                src="{{ asset('https://res.cloudinary.com/https-midastouchacademy-com/image/upload/v1618726423/mti_primary_img.jpg') }}"
                                 class="card-img-top" alt="..."></div>
                         <div class="info">
                             <h6 class="title">
@@ -80,81 +205,11 @@
         </section>
     </div>
 
-    <section for="tutors" class="tutors_section mb-5">
-        <div class="bg-default">
-            <article class="card-body ">
-                <h3 class="text-center font-weight-bold label"> Our Tutors</h3>
-                <div class="wrapper">
-                    <div class="tutor_info">
-                        <img src="{{ asset('/images/alejandro-escamilla.jpg') }}" alt="">
-                        <p class="text-center name">
-                            <span>Gabriel Onyebuolise</span>
-                            <span class="role">Graphics Design Tutor</span>
-                        </p>
-                    </div>
-                    <div class="tutor_info">
-                        <img src="{{ asset('/images/alejandro-escamilla.jpg') }}" alt="">
-                        <p class="text-center name">
-                            <span>Shanks Akagami</span>
-                            <span class="role">Web Design Tutor</span>
-                        </p>
-                    </div>
-                    <div class="tutor_info">
-                        <img src="{{ asset('/images/alejandro-escamilla.jpg') }}" alt="">
-                        <p class="text-center name">
-                            <span>Gol D. Roger</span>
-                            <span class="role">Animation Tutor</span>
-                        </p>
-                    </div>
-                </div>
-                <div class="text-center py-4">
-                    <a href="#" class="btn btn-outline-light text-capitalize px-5 py-3 ">See all Tutors</a>
-                </div>
-            </article>
-        </div>
-    </section>
-
-    <section for="upcoming-events" class=" upcoming_events mb-5">
-        <div class="card-body">
-            <h3 class="text-center text-dark font-weight-bold">Upcoming Events</h3>
+    <section for="upcoming-events" class=" upcoming_events pb-5 sections bg-default">
+        <div class="card-body px-0">
+            <h3 class="text-center text-light font-weight-bold py-4">Upcoming Events</h3>
             <div class="event_listing">
-                <article>
-                    <section class="event_detail">
-                        <div class="card-body d-flex flex-column justify-content-between">
-                            <h5 class="event_title">Graphics Design <br> Master Class</h5>
-                            <p class="event_date">Monday, February 28th</p>
-                        </div>
-                    </section>
-                    <img src="{{ asset('/images/alejandro-escamilla.jpg') }}" class="event_img" alt="...">
-                </article>
-
-                <article>
-                    <section class="event_detail">
-                        <div class="card-body d-flex flex-column justify-content-between">
-                            <h5 class="event_title">Zoom <br> Hangout</h5>
-                        </div>
-                    </section>
-                    <img src="{{ asset('/images/alejandro-escamilla.jpg') }}" class="event_img" alt="...">
-                </article>
-
-                <article>
-                    <section class="event_detail">
-                        <div class="card-body d-flex flex-column justify-content-between">
-                            <h5 class="event_title">CH <br> Hangout</h5>
-                        </div>
-                    </section>
-                    <img src="{{ asset('/images/alejandro-escamilla.jpg') }}" class="event_img" alt="...">
-                </article>
-
-                <article>
-                    <section class="event_detail">
-                        <div class="card-body d-flex flex-column justify-content-between">
-                            <h5 class="event_title">Basics of Forex <br> Trading</h5>
-                            <p class="event_date">Monday, March 30th</p>
-                        </div>
-                    </section>
-                    <img src="{{ asset('/images/alejandro-escamilla.jpg') }}" class="event_img" alt="...">
-                </article>
+                @include('components.carousel')
             </div>
         </div>
     </section>

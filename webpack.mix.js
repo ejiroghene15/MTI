@@ -13,4 +13,5 @@ const mix = require("laravel-mix");
 
 mix.sass("resources/scss/custom.scss", "public/css")
     .sass("resources/scss/animations.scss", "public/css")
-    .sass("resources/scss/variables.scss", "public/css");
+    .sass("resources/scss/variables.scss", "public/css")
+    .sass("resources/scss/dashboard.scss", "public/css");
