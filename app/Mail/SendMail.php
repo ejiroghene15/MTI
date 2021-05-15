@@ -39,6 +39,10 @@ class SendMail extends Mailable
                 $this->url .= "/reset_password?token=$this->token";
                 return $this->subject("Reset Password ")->markdown('email.password_reset')->withUrl($this->url);
                 break;
+            case 'verify_account':
+                $this->url .= "/verify?token=$this->token";
+                return $this->subject("Verify Your Email")->markdown('email.account_verfication')->withUrl($this->url);
+                break;
         }
     }
 }

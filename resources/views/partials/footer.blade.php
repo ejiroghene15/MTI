@@ -1,7 +1,7 @@
 <footer class="bg-default px-3 pt-4 pb-1" id="general_footer">
     <nav class="d-flex pb-2">
         <span>
-            <a href="https://blog.midastouchacademy.com">Blog</a>
+            <a href="/blog">Blog</a>
             <a href="{{ route('about') }}">About Us</a>
             <a href="{{ route('our_team') }}">Our Team</a>
             <a href="{{ route('tutors') }}">Tutors</a>
@@ -11,7 +11,7 @@
             <a href="{{ url('https://www.facebook.com/storiesuntold.truthhaven/') }}">
                 <img src="{{ asset('/images/social/facebook.png') }}" alt="facebook">
             </a>
-            <a href="#" class="d-none">
+            <a href="{{ url('https://twitter.com/MTI_academy') }}">
                 <img src="{{ asset('/images/social/twitter.png') }}" alt="twitter">
             </a>
             <a href="{{ url('https://www.linkedin.com/company/midas-touch-academy') }}">

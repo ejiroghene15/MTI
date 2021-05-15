@@ -24,15 +24,15 @@
 
     <div class="container-fluid my-5 sections">
         <div class="card-body">
-            @if ($upcoming)
+            @if ($class)
             <div class="row">
                 <div class="col-md-8 mx-auto text-center">
-                    <span class="badge badge-primary badge-pill mb-3">Upcoming Class</span>
-                    <h3 class="display-3 mb-0">{{ $upcoming->name }}</h3>
+                    <span class="badge badge-pill mb-3 pri-color-alt pt-2 d-inline-block">Upcoming Class</span>
+                    <h3 class="display-3 mb-0">{{ $class->name }}</h3>
                     <p class="lead ">
-                        {!! nl2br($upcoming->excerpt) !!}
+                        {!! nl2br($class->excerpt) !!}
                     </p>
-                    <a href="{{ route('event',  $upcoming->link_id) }}" class="btn btn-primary mb-5">View Course
+                    <a href="{{ route('class',  $class->link_id) }}" class="btn btn-default mb-5">View Course
                         Details</a>
                 </div>
             </div>
@@ -108,7 +108,7 @@
                         <img src="{{ asset('https://res.cloudinary.com/https-midastouchacademy-com/image/upload/v1619178900/tutors/gabriel_olisa.jpg') }}"
                             alt="">
                         <p class="text-center name">
-                            <span>Olisa Gabriel</span>
+                            <span>Onyebuolise Gabriel</span>
                             <span class="role">Graphic Design</span>
                         </p>
                     </div>
@@ -131,26 +131,26 @@
 
     <div class="container-fluid my-5 sections">
         <section for="blog-posts" class="card-body my-5">
-            <h4 class="text-dark font-weight-bold mb-4">Blog Posts</h4>
+            <h4 class="text-default font-weight-bold mb-4">Blog Posts</h4>
 
             <div class="blog mb-3">
                 @foreach ($blogposts as $post)
                 <article class="blog-post">
                     <a class="excerpt" href="{{ $post->guid }}" target="_blank">
                         <div class="thumbnail">
-                            @foreach ($attachment as $image)
-                            @if ($image->post_parent == $post->ID)
-                            <img src="{{ $image->guid }}" class="card-img-top">
-                            @endif
-                            @endforeach
+                            <img src="{{ $attachment->where('post_parent', $post->ID)->first()->guid }}"
+                                class="card-img-top">
                         </div>
-                        <div class="info">
-                            <h6 class="title">
+                        <div class="info py-0">
+                            <h6 class="title mb-0">
                                 <span class="text-capitalize">
-                                    {{ Str::lower($post->post_title) }}
+                                    {{ Str::title(Str::words($post->post_title, 5, '...')) }}
                                 </span>
                             </h6>
-                            <small> Read Article</small>
+                            <div class="short-text">
+                                {!! Str::words($post->post_content, 13, '...') !!}
+                            </div>
+                            <small class="mt-auto mb-3 btn btn-sm btn-default text-capitalize"> Read Article</small>
                         </div>
                     </a>
                 </article>
@@ -201,7 +201,7 @@
 
             </div>
 
-            <a href="#" class="btn btn-default text-capitalize px-5 py-3 ">See all</a>
+            <a href="#" class="btn btn-default text-capitalize px-5 py-3  d-none">See all</a>
         </section>
     </div>
 

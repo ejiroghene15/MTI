@@ -46,22 +46,28 @@
                         </li>
 
                         <li class="nav-item">
-                            <a class="nav-link mb-sm-3 mb-md-0" id="tabs-icons-text-3-tab" data-toggle="tab"
+                            <a class="nav-link mb-sm-3 mb-md-0"  data-toggle="tab"
                                 href="#tabs-icons-text-3" role="tab" aria-selected="false"><i
                                     class="ni ni-money-coins mr-2"></i>Payments</a>
                         </li>
 
                         <li class="nav-item">
-                            <a class="nav-link mb-sm-3 mb-md-0" id="tabs-icons-text-3-tab" data-toggle="tab"
-                                href="#upcoming-courses" role="tab" aria-selected="false">
-                                <i class="fa fa-calendar-plus-o mr-2"></i>Upcoming Courses</a>
+                            <a class="nav-link mb-sm-3 mb-md-0"  data-toggle="tab"
+                                href="#events" role="tab" aria-selected="false">
+                                <i class="fa fa-calendar-check-o mr-2"></i>Events</a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link mb-sm-3 mb-md-0"  data-toggle="tab"
+                                href="#classes" role="tab" aria-selected="false">
+                                <i class="fa fa-institution mr-2"></i>Classes</a>
                         </li>
                     </ul>
                 </div>
 
                 <div class="card shadow">
                     <div class="card-body">
-                        <div class="tab-content" id="myTabContent">
+                        <div class="tab-content">
                             <div class="tab-pane fade show active" id="users" role="tabpanel">
                                 @include('admin.users')
                             </div>
@@ -71,8 +77,11 @@
                             <div class="tab-pane fade" id="courses" role="tabpanel">
                                 @include('admin.courses')
                             </div>
-                            <div class="tab-pane fade" id="upcoming-courses" role="tabpanel">
+                            <div class="tab-pane fade" id="events" role="tabpanel">
                                 @include('admin.upcoming')
+                            </div>
+                            <div class="tab-pane fade" id="classes" role="tabpanel">
+                                @include('admin.classes')
                             </div>
                         </div>
                     </div>
@@ -89,10 +98,13 @@
 
 @section('js')
 @parent
+
 <script type="text/javascript"
     src="https://cdn.datatables.net/v/bs4/dt-1.10.24/r-2.2.7/sb-1.0.1/sp-1.2.2/datatables.min.js"></script>
+<script src="/js/dropify.min.js"></script>
 <script>
     $(document).ready(function() {
+
         $('.dt').DataTable();
 
         $(".delete_course").on("click", function(e){

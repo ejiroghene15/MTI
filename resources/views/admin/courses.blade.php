@@ -58,26 +58,34 @@
         <table class="dt table table-striped table-bordered w-100">
             <thead class="bg-default text-light">
                 <tr>
-                    <th>Course</th>
-                    <th>Course Description</th>
-                    <th>Action</th>
+                    <th>Courses</th>
+
                 </tr>
             </thead>
             <tbody>
                 @foreach ($courses as $course)
                 <tr>
-                    <td>{{ $course->course_title}}</td>
-                    <td>{{ Str::words($course->course_description, 20)  }}</td>
-                    <td class="d-flex">
-                        <button class="btn btn-sm btn-default text-capitalize" style="white-space: nowrap"
-                            data-toggle="modal" data-target="#editcourse{{ $course->id  }}">Edit Course</button>
-                        <form action="{{ route('delete_course') }}" method="post" class="d-inline-block">
-                            @csrf
-                            <input type="hidden" name="course_id" value="{{ $course->id }}">
-                            <input type="hidden" name="course_name" value="{{ $course->course_title }}">
-                            <button class="btn btn-sm btn-warning text-capitalize delete_course"
-                                style="white-space: nowrap">Delete Course</button>
-                        </form>
+                    <td>
+                        <div class="d-flex">
+                            <img src="{{ $course->image }}" alt="" height="100" width="150">
+                            <div class="d-flex flex-column justify-content-around ml-3">
+                                <strong>{{ $course->course_title}}</strong>
+                                <span class="py-2"> {{ $course->excerpt }} </span>
+                                <div>
+                                    <button class="btn btn-sm btn-default text-capitalize" data-toggle="modal"
+                                        data-target="#editcourse{{ $course->id  }}">Edit Course</button>
+                                    <form action="{{ route('delete_course') }}" method="post" class="d-inline-block">
+                                        @csrf
+                                        <input type="hidden" name="course_id" value="{{ $course->id }}">
+                                        <input type="hidden" name="course_name" value="{{ $course->course_title }}">
+                                        <button class="btn btn-sm btn-warning text-capitalize delete_course"
+                                            style="white-space: nowrap">
+                                            Delete Course
+                                        </button>
+                                </div>
+                                </form>
+                            </div>
+                        </div>
 
                         <div class="modal fade" id="editcourse{{ $course->id  }}" tabindex="-1" role="dialog"
                             aria-hidden="true">

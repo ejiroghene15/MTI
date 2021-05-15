@@ -29,12 +29,15 @@
 
                 @if ($course->tutor)
                 <aside>
-                    <label for="" class="mb-3">Course Faculty</label>
-                    <div class="tutor_info">
-                        <img src="{{ asset($course->tutor->picture) }}" alt="">
+                    <label for="" class="mb-3 d-none">Course Faculty</label>
+                    <div class="tutor_info mt-3">
+                        <section class="background">
+                            <section class="cover"></section>
+                        </section>
                         <p class="text-center p-2">
+                            <img src="{{ asset($course->tutor->picture) }}" alt="">
                             <span class="name">{{ $course->tutor->first_name . ' ' .$course->tutor->last_name }}</span>
-                            <span class="role">Instructor</span>
+                            <span class="role"> Instructor</span>
                         </p>
                     </div>
                 </aside>
@@ -57,7 +60,7 @@
 
                         <footer>
                             <span class="avatar avatar-lg rounded-circle">
-                                <img src="{{ $course->tutor->image }}" alt=""></span>
+                                <img src="{{ $course->tutor->picture }}" alt=""></span>
                             <span>
                                 <span class="tutor">
                                     {{ $course->tutor->first_name . " " . $course->tutor->last_name }}

@@ -48,7 +48,7 @@
                     </li>
 
                     <li class="nav-item">
-                        <a class="nav-link " href="https://blog.midastouchacademy.com">
+                        <a class="nav-link " href="/blog">
                             <span>Blog</span>
                         </a>
                     </li>

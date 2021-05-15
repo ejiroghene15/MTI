@@ -58,7 +58,9 @@
                             <div class="col-lg-4 order-lg-1">
                                 <div class="card-profile-stats d-flex justify-content-center">
                                     <div>
-                                        <span class="heading">0</span>
+                                        <span class="heading">
+                                            {{ $user->courses_registered->where('event_type', 'class')->where('payment_status', 1)->count() }}
+                                        </span>
                                         <span class="description">Courses Registered</span>
                                     </div>
                                     <div>

@@ -23,8 +23,12 @@ Route::domain('admin.' . env('APP_URL'))->group(function () {
     Route::post('create_course', [Admin::class, 'createCourse'])->name('create_course');
     Route::post('update_course', [Admin::class, 'updateCourse'])->name('update_course');
     Route::post('delete_course', [Admin::class, 'deleteCourse'])->name('delete_course');
+    Route::post('create_event', [Admin::class, 'createEvent'])->name('create_event');
+    Route::post('update_event', [Admin::class, 'updateEvent'])->name('update_event');
+    Route::post('delete_event', [Admin::class, 'deleteEvent'])->name('delete_event');
     Route::post('create_class', [Admin::class, 'createClass'])->name('create_class');
-    Route::post('update_class', [Admin::class, 'deleteClass'])->name('delete_class');
+    Route::post('update_class', [Admin::class, 'updateClass'])->name('update_class');
+    Route::post('delete_class', [Admin::class, 'deleteClass'])->name('delete_class');
 });
 
 Route::domain(env('APP_URL'))->group(function () {
@@ -33,7 +37,19 @@ Route::domain(env('APP_URL'))->group(function () {
 
     Route::get('event/{upcoming:link_id}', [General::class, 'upcoming'])->name('event');
 
+    Route::get('class/{classes:link_id}', [General::class, 'classDetails'])->name('class');
+
+    // Route::get('register_class/{classes:link_id}', [General::class, 'classDetails']);
+
+    Route::get('make_payment/{classes:link_id}', [General::class, 'makePayment'])->name('make_payment');
+
+    Route::get('confirm_payment', [General::class, 'confirmPayment'])->name('confirm_payment');
+
     Route::get('courses/{course}', [General::class, 'courses'])->name('course_info');
+
+    Route::get('blog', function () {
+        return redirect()->away('https://blog.midastouchacademy.com');
+    });
 
     Route::get('about_us', function () {
         return view('pages.about');
@@ -82,6 +98,8 @@ Route::domain(env('APP_URL'))->group(function () {
     Route::post('register', [Auth::class, 'newUserRegistration'])->name('new_registration');
 
     Route::get('verify', [Auth::class, 'verifyEmail']);
+
+    Route::post('reverify', [Auth::class, 'resendVerificationMail'])->name('reverify');
 
     Route::post('forgot_password', [Auth::class, 'forgotPassword'])->name('forgot_password');
 

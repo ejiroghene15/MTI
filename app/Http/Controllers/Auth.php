@@ -15,12 +15,18 @@ class Auth extends Controller
 
     public function __construct()
     {
-        $this->middleware('guest')->except('logout');
+        $this->middleware('guest')->except('logout', 'resendVerificationMail', 'verifyEmail');
     }
 
     public function login()
     {
         return view('login');
+    }
+
+    public function sendVerificationMail($user, $token, $type)
+    {
+        $sm = Mail::to($user)->send(new SendMail("$type", $token));
+        return $sm;
     }
 
     public function newUserRegistration(Request $request)
@@ -46,7 +52,7 @@ class Auth extends Controller
 
         $verification_token = Str::random(50) . "_" . bin2hex($request->email);
 
-        $sm = Mail::to($request->email)->send(new SendMail("registration", $verification_token));
+        $sm = $this->sendVerificationMail($request->email, $verification_token, 'registration');
 
         if (is_null($sm)) {
             User::create([
@@ -61,6 +67,19 @@ class Auth extends Controller
             return redirect('login')->withMessage('Registration Successful. A verification link has been sent to your email')->withType("success");
         } else {
             return redirect('login')->withMessage('Registration Failed. An error occured on registration.')->withType("danger");
+        }
+    }
+
+    public function resendVerificationMail()
+    {
+        $user = auth()->user()->email;
+        $verification_token = Str::random(50) . "_" . bin2hex($user);
+        $sm = $this->sendVerificationMail($user, $verification_token, 'verify_account');
+        if (is_null($sm)) {
+            User::where('email', $user)->update([
+                'email_verification_token' => $verification_token
+            ]);
+            return back()->withMessage("A verification link has been sent. Refresh this page after you've verified your email")->withType("success");
         }
     }
 
@@ -101,7 +120,8 @@ class Auth extends Controller
         $user = User::where('email', $email);
 
         if ($user->count()) {
-            $sm = Mail::to($request->email)->send(new SendMail("reset_password", $verification_token));
+
+            $sm = $this->sendVerificationMail($request->email, $verification_token, 'reset_password');
 
             if (is_null($sm)) {
                 $user->update([
@@ -161,9 +181,13 @@ class Auth extends Controller
     public function authenticateUser(Request $request)
     {
         $credentials = $request->only('email', 'password');
+        $prev_url = session('prev-url');
 
         if (auth()->attempt($credentials)) {
             $request->session()->regenerate();
+            if (!empty($prev_url)) {
+                return redirect($prev_url);
+            }
             return redirect()->intended();
         } else {
             return back()->withMessage('Incorrect login details')->withType('warning');

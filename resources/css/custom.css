@@ -239,7 +239,7 @@ body *:not(.fa, .ni) {
 #homepage .blog .blog-post .excerpt .info {
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  row-gap: 1em;
   padding: 1em;
 }
 #homepage .blog .blog-post .excerpt .info .title {
@@ -247,6 +247,12 @@ body *:not(.fa, .ni) {
   font-size: 1.1em;
   margin-bottom: 10px;
   font-weight: 600;
+}
+#homepage .blog .blog-post .excerpt .info .short-text {
+  color: #41474ccf;
+}
+#homepage .blog .blog-post .excerpt .info .short-text p {
+  font-weight: 600 !important;
 }
 #homepage .blog .blog-post .excerpt .info small {
   font-size: 0.9em;

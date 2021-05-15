@@ -1,0 +1,44 @@
+main#dashboard .card-profile-image {
+  z-index: 10;
+}
+main#dashboard .card-profile-image img {
+  transform: translate(-50%, -50%) !important;
+  width: 170px !important;
+  height: 170px !important;
+  padding: 10px;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+@media screen and (min-width: 620px) {
+  main#dashboard .section-profile-cover::after {
+    position: absolute;
+    content: "";
+    height: 100%;
+    width: 100%;
+    top: 0;
+    left: 0;
+    background-color: #010d219e;
+  }
+}
+@media screen and (max-width: 520px) {
+  main#dashboard .card-profile {
+    margin-top: -40vh !important;
+  }
+  main#dashboard .profile-tab {
+    text-transform: capitalize;
+  }
+}
+main#dashboard .form-wrapper {
+  padding: 3vh 3vw 0;
+  background-color: #f4f5f7;
+}
+@media screen and (max-width: 768px) {
+  main#dashboard .form-wrapper {
+    padding: 0;
+  }
+}
+main#dashboard .form-error {
+  font-size: 14px;
+  font-weight: 500;
+  color: #f5365cc7;
+}
