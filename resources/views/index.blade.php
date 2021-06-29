@@ -6,7 +6,7 @@
 <main id="homepage">
     <section class="hero_section">
         <section class="section_intro">
-            <h2 class="main_text">Become a Shrewd Professional</h2>
+            <h2 class="main_text">Become a Professional</h2>
             <h4 class="text-light sub_text">
                 Learn soft and hard skills from any location in the world. <br> With access to over 100 tutors, we help
                 students achieve mastery of highly sought-after skills.
@@ -205,14 +205,6 @@
         </section>
     </div>
 
-    <section for="upcoming-events" class=" upcoming_events pb-5 sections bg-default">
-        <div class="card-body px-0">
-            <h3 class="text-center text-light font-weight-bold py-4">Upcoming Events</h3>
-            <div class="event_listing">
-                @include('components.carousel')
-            </div>
-        </div>
-    </section>
 </main>
 
 @include('partials.footer')

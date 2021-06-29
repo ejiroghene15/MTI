@@ -5,6 +5,7 @@ use App\Http\Controllers\Auth;
 use App\Http\Controllers\General;
 use App\Http\Controllers\User;
 use Illuminate\Support\Facades\Route;
+use Laravel\Socialite\Facades\Socialite;
 
 /*
 |--------------------------------------------------------------------------
@@ -109,7 +110,14 @@ Route::domain(env('APP_URL'))->group(function () {
 
     Route::get('logout', [Auth::class, 'logout']);
 
+    // * testing mail function locally
     Route::get('/mailable', function () {
         return new App\Mail\SendMail('registration', '1254');
     });
+
+    Route::get('oauth', function () {
+        return Socialite::driver('google')->redirect();
+    })->name('oauth-google');
+
+    Route::get('oauth-verify', [Auth::class, 'oAuth']);
 });

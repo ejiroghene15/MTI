@@ -35,6 +35,11 @@
     opacity: 1;
   }
 }
+.pri-color-alt {
+  background-color: #eebb1a;
+  color: #fff;
+}
+
 html {
   height: 100%;
   scroll-behavior: smooth;
@@ -228,18 +233,17 @@ body *:not(.fa, .ni) {
   overflow: hidden;
 }
 #homepage .blog .blog-post .excerpt .thumbnail {
-  width: 200px;
+  width: 170px;
   height: 150px;
 }
 #homepage .blog .blog-post .excerpt .thumbnail .card-img-top {
   border-radius: 5px;
   height: 150px;
-  width: 200px;
+  width: 170px;
 }
 #homepage .blog .blog-post .excerpt .info {
   display: flex;
   flex-direction: column;
-  row-gap: 1em;
   padding: 1em;
 }
 #homepage .blog .blog-post .excerpt .info .title {
@@ -250,14 +254,21 @@ body *:not(.fa, .ni) {
 }
 #homepage .blog .blog-post .excerpt .info .short-text {
   color: #41474ccf;
+  margin-top: 10px;
 }
 #homepage .blog .blog-post .excerpt .info .short-text p {
   font-weight: 600 !important;
+  font-size: 14px;
 }
 #homepage .blog .blog-post .excerpt .info small {
-  font-size: 0.9em;
+  font-size: 0.8em;
   font-weight: 600;
-  color: #172b4d9c;
+  color: #fff !important;
+  background-color: #eebb1a !important;
+  border-color: #eebb1a;
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
 }
 #homepage .tutors_section {
   height: auto;
@@ -378,7 +389,7 @@ body *:not(.fa, .ni) {
 }
 #course_page .about_course {
   position: relative;
-  margin-top: -35vh;
+  margin-top: -15em;
   margin-bottom: 5em;
   gap: 2em;
 }
@@ -437,27 +448,46 @@ body *:not(.fa, .ni) {
   box-shadow: 0px 2px 10px #25262914;
   width: 300px;
 }
-#course_page .about_course > article > aside .tutor_info img {
-  height: 240px;
-  width: 300px;
-  border-radius: 5px 5px 0 0;
-  display: block;
-  -o-object-fit: cover;
-     object-fit: cover;
+#course_page .about_course > article > aside .tutor_info .background {
+  height: 200px;
+  background: url("https://res.cloudinary.com/https-midastouchacademy-com/image/upload/v1618693692/mti_logo.jpg") no-repeat center;
+  background-size: 100%;
+  background-position-y: -13vh;
+  width: 100%;
+}
+#course_page .about_course > article > aside .tutor_info .background .cover {
+  background-color: #04034304;
+  height: 200px;
+  width: 100%;
+  border-radius: 5px;
 }
 #course_page .about_course > article > aside .tutor_info p {
+  margin-top: -6vh;
   background-color: #172b4d;
-  color: #dddddd;
+  color: #ddd;
   border-radius: 0 0 5px 5px;
+}
+#course_page .about_course > article > aside .tutor_info p img {
+  height: 80px;
+  width: 80px;
+  border-radius: 50%;
+  display: block;
+  margin: auto;
+  -o-object-fit: cover;
+     object-fit: cover;
+  position: relative;
+  margin-top: -6vh;
+  margin-bottom: 0.5em;
 }
 #course_page .about_course > article > aside .tutor_info p .name {
   font-weight: 600;
   font-size: 15px;
 }
 #course_page .about_course > article > aside .tutor_info p .role {
-  font-size: 14px;
+  font-size: 13px;
   display: block;
-  line-height: 1.5em;
+  line-height: 2em;
+  font-weight: 600;
 }
 #course_page #more_courses {
   margin-bottom: 5em;
@@ -493,7 +523,7 @@ body *:not(.fa, .ni) {
   padding: 10px;
   font-weight: 600;
   font-size: 1em;
-  color: #172b4da1;
+  color: #172b4d;
 }
 #course_page #more_courses > section > article .image {
   height: 180px;
@@ -552,14 +582,10 @@ body *:not(.fa, .ni) {
 }
 @media screen and (max-width: 400px) {
   #course_page .about_course > article {
-    padding: 1.5em;
+    padding: 1.5em 1em;
   }
   #course_page .about_course > article .tutor_info {
     width: 100% !important;
-  }
-  #course_page .about_course > article .tutor_info img {
-    width: 100% !important;
-    height: 220px !important;
   }
 }
 
@@ -635,7 +661,7 @@ body *:not(.fa, .ni) {
   padding: 10px;
   font-weight: 600;
   font-size: 1em;
-  color: #172b4da1;
+  color: #172b4d;
 }
 #courses_all #courses > article .image {
   height: 180px;
@@ -1082,9 +1108,6 @@ body *:not(.fa, .ni) {
   font-size: 14px;
 }
 
-#general_footer {
-  border-top: 1px solid rgba(221, 221, 221, 0.268);
-}
 #general_footer nav a {
   color: #fff;
   margin: 0 10px;

@@ -35,7 +35,7 @@ class Admin extends Controller
         $course->excerpt = $request->excerpt;
         $course->image = $request->course_background;
         $course->slug =  Str::slug(Str::lower($request->course_name), '-');
-        $course->tutor_id = $request->tutor;
+        // $course->tutor_id = $request->tutor;
         $course->course_description = $request->course_description;
         $course->save();
         return back()->withMessage("The course '$request->course_name' has been created and assigned to a tutor")->withType('success');
@@ -98,8 +98,6 @@ class Admin extends Controller
 
     public function createClass(Request $request)
     {
-        // $exp_date = new DateTime($_POST['expiration']);
-        // $expiration = $exp_date->getTimestamp();
         $class = new Classes;
         $class->name = $request->name;
         $class->price = $request->price;

@@ -349,7 +349,7 @@ body {
 
     .about_course {
         position: relative;
-        margin-top: -35vh;
+        margin-top: -15em;
         margin-bottom: 5em;
         gap: 2em;
 
@@ -550,7 +550,7 @@ body {
                 }
             }
         }
-    }
+    } 
 }
 
 #courses_all {
@@ -1070,7 +1070,7 @@ body {
 }
 
 #general_footer {
-    border-top: 1px solid rgba(221, 221, 221, 0.268);
+    // border-top: 1px solid rgba(221, 221, 221, 0.268);
     nav a {
         color: #fff;
         margin: 0 10px;

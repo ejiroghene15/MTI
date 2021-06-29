@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Validator;
 use App\Mail\SendMail;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Str;
+use Laravel\Socialite\Facades\Socialite;
 
 class Auth extends Controller
 {
@@ -23,10 +24,42 @@ class Auth extends Controller
         return view('login');
     }
 
-    public function sendVerificationMail($user, $token, $type)
+    public function authenticateUser(Request $request)
     {
-        $sm = Mail::to($user)->send(new SendMail("$type", $token));
-        return $sm;
+        $credentials = $request->only('email', 'password');
+        $prev_url = session('prev-url');
+
+        if (auth()->attempt($credentials)) {
+            $request->session()->regenerate();
+            if (!empty($prev_url)) {
+                return redirect($prev_url);
+            }
+            return redirect()->intended();
+        } else {
+            return back()->withMessage('Incorrect login details')->withType('warning');
+        }
+    }
+
+    public function oAuth()
+    {
+        $user = Socialite::driver('google')->user();
+        $existing_user = User::where('email', $user->email)->first();
+        if ($existing_user) {
+            auth()->login($existing_user, true);
+        } else {
+            $new_user = User::create([
+                'first_name' => $user->user['given_name'],
+                'last_name' => $user->user['family_name'],
+                'email' => $user->email,
+                'email_verified' => 1,
+                'google_id' => $user->user['id'],
+                'role' => 'Student',
+                'password' => '',
+                'picture' => $user->getAvatar()
+            ]);
+            auth()->login($new_user, true);
+        }
+        return redirect()->route('home');
     }
 
     public function newUserRegistration(Request $request)
@@ -68,6 +101,12 @@ class Auth extends Controller
         } else {
             return redirect('login')->withMessage('Registration Failed. An error occured on registration.')->withType("danger");
         }
+    }
+
+    public function sendVerificationMail($user, $token, $type)
+    {
+        $sm = Mail::to($user)->send(new SendMail("$type", $token));
+        return $sm;
     }
 
     public function resendVerificationMail()
@@ -176,22 +215,6 @@ class Auth extends Controller
         ]);
 
         return redirect('login')->withMessage('Your password reset was successful')->withType('success');
-    }
-
-    public function authenticateUser(Request $request)
-    {
-        $credentials = $request->only('email', 'password');
-        $prev_url = session('prev-url');
-
-        if (auth()->attempt($credentials)) {
-            $request->session()->regenerate();
-            if (!empty($prev_url)) {
-                return redirect($prev_url);
-            }
-            return redirect()->intended();
-        } else {
-            return back()->withMessage('Incorrect login details')->withType('warning');
-        }
     }
 
     public function logout(Request $request)

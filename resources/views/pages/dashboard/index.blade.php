@@ -4,13 +4,15 @@
 @parent
 <link rel="stylesheet" href="/css/dashboard.css">
 <link rel="stylesheet" href="/css/dropify.min.css">
+<link rel="stylesheet"
+    href="https://cdn.datatables.net/v/bs4/dt-1.10.24/r-2.2.7/sb-1.0.1/sp-1.2.2/datatables.min.css" />
+    
 @endsection
 @section('body')
 
 @include('partials.nav')
 
 <main id="dashboard" class="profile-page">
-
 
     <div class="wrapper">
         <section class="section-profile-cover section-shaped my-0">
@@ -57,9 +59,9 @@
 
                             <div class="col-lg-4 order-lg-1">
                                 <div class="card-profile-stats d-flex justify-content-center">
-                                    <div>
+                                    <div data-toggle="tab" href="#my-courses" class="profile-tab" style="cursor: pointer">
                                         <span class="heading">
-                                            {{ $user->courses_registered->where('event_type', 'class')->where('payment_status', 1)->count() }}
+                                            {{ $courses_registered->count() }}
                                         </span>
                                         <span class="description">Courses Registered</span>
                                     </div>
@@ -87,6 +89,10 @@
                             @include('pages.dashboard.settings')
                         </div>
 
+                        <div class="tab-pane" id="my-courses" style="display: none">
+                            @include('pages.dashboard.my_courses')
+                        </div>
+
                     </div>
                 </div>
             </div>
@@ -112,6 +118,8 @@
 
 @section('js')
 @parent
+<script type="text/javascript"
+    src="https://cdn.datatables.net/v/bs4/dt-1.10.24/r-2.2.7/sb-1.0.1/sp-1.2.2/datatables.min.js"></script>
 <script src="/js/dropify.min.js"></script>
 <script>
     $(".profile-tab").on("click", function () {
@@ -126,6 +134,6 @@ $(`${id}`).fadeIn();
 });
 
 $('.dropify').dropify();
-
+$('.dt').DataTable();
 </script>
 @endsection

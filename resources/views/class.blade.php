@@ -30,14 +30,24 @@
                             {{ $class->description }}
                         </article>
 
+                        {{-- course outline and price --}}
                         <p>
                             <a href="{{ $class->course_outline }}" class="outline btn shadow-sm text-capitalize mt-3"
                                 target="_blank">
-                                <strong>See
-                                    Course Outline</strong></a>
+                                <strong><i class="fa fa-book mr-2"></i>See Course Outline</strong>
+                            </a>
 
-                            <span class="price btn btn-info text-capitalize d-inline-block mt-3"><strong>Class Price:
-                                    ₦{{ $class->price  }}</strong>
+                            <span class="price btn btn-info text-capitalize d-inline-block mt-3">
+                                <strong>Class Price:
+
+                                    @if ($class->price <= 0) FREE @else ₦{{ $class->price  }} @endif </strong> </span>
+                                        <span class="price btn pri-color-alt text-capitalize d-inline-block mt-3"
+                                        style="color: #fff">
+                                        <strong>Original Price:
+
+                                            <s>
+                                                (₦{{ $class->original_price  }})</s>
+                                        </strong>
                             </span>
                         </p>
 
@@ -47,76 +57,95 @@
                                 {{ date('jS\ F Y', strtotime($class->end)) }}</small>
                         </p>
 
+
                         {{-- if the registration has ended,  display a message telling the user that registration has ended --}}
                         @if (time() > strtotime($class->end_registration))
                         <label class="text-warning">Registration for this class has ended</label>
                         @else
-                        @guest
-                        <p class="text-warning" style="font-weight: 600">Registration ends
-                            {{ date('jS\ F, Y', strtotime($class->end_registration)) }}</p>
-                        <article>
-                            <strong>
-                                Lectures would be held live via a zoom class. To participate in the lectures, after
-                                payment has been made and confirmed, the link to the live zoom class will be sent to
-                                your email address.
-                            </strong>
-                        </article>
-                        @endguest
 
-                        @auth
-                        {{-- opening auth --}}
-                        @if ( $class->payments->where('user', auth()->user()->email)->where('payment_status',
-                        1)->where('event_link_id', $class->link_id)->first())
-                        {{-- if a user has made payment for the course.. display the message below --}}
-                        <label for="" class="my-2 text-success">Registration Successful</label>
-                        <p>
-                            <strong style="font-weight: 600; font-size: 14px">
-                                The zoom link invite for this class would be sent to
-                                your email. You can also find it in your dashboard, under <q>Courses Registered</q>
-                                menu. For further enquires, send us a mail at
-                                <a href="mailto:support@midastouchacademy.com">support@midastouchacademy.com</a>.
-                            </strong>
-                        </p>
-                        @else
-                        @if (boolval(auth()->user()->email_verified))
-                        {{-- if the user is a verified user that's yet to make payment, display payment button below --}}
-                        <p class="text-warning" style="font-weight: 600">Registration ends
-                            {{ date('jS\ F, Y', strtotime($class->end_registration)) }}</p>
-                        <article>
-                            <strong>
-                                Lectures would be held live via a zoom class. To participate in the lectures, after
-                                payment has been made and confirmed, the link to the live zoom class will be sent to
-                                your email address.
-                            </strong>
-                        </article>
-                        <a href="{{ route('make_payment',  $class->link_id) }}" class="btn btn-success mt-3">
-                            Proceed with payment
-                        </a>
-                        @else
-                        {{-- if the user hasn't verified their account, display a button below that sends a verification mail --}}
-                        <p class="mt-3">
-                            <strong style="font-weight: 600; font-size: 14px">
-                                You haven't verified your email.
-                                Your email has to be verified before
-                                you can register for a class. Click on the button below to resend verification link
-                                to
-                                your mail.
-                            </strong>
-                        </p>
-                        <form action="{{ route('reverify') }}" method="post">
-                            @csrf
-                            <button class="btn btn-dark">Send Verification Mail</button>
-                        </form>
-                        @endif
-                        @endif
-                        @else
-                        <p class="mt-3"><strong>N:B: You need to be logged in to register for this class.</strong>
-                        </p>
-                        <a href="{{ route('login') }}" class="btn btn-default">Login</a>
-                        {{-- closing auth --}}
-                        @endauth
+                        @if ($class->price <= 0) <a class="outline btn btn-success shadow-sm text-capitalize  mb-3"
+                            href="https://chat.whatsapp.com/KZl6cBtOYxb8xLLsp9hXbD">
+                            <strong><i class="fa fa-whatsapp mr-2"></i>Join Whatsapp Group</strong>
+                            </a>
 
-                        @endif
+                            <p class="text-warning" style="font-weight: 600">Registration ends
+                                {{ date('jS\ F, Y', strtotime($class->end_registration)) }}
+                            </p>
+
+                            @else
+
+                            {{-- this section will be displayed to the user if it's a guest --}}
+                            @guest
+                            <p class="text-warning" style="font-weight: 600">Registration ends
+                                {{ date('jS\ F, Y', strtotime($class->end_registration)) }}
+                            </p>
+
+                            <article>
+                                <strong>
+                                    Lectures would be held live via a zoom class. To participate in the lectures, after
+                                    payment has been made and confirmed, the link to the live zoom class will be sent to
+                                    your email address.
+                                </strong>
+                            </article>
+
+                            @endguest
+
+                            {{-- this section will be displayed to the user if they are logged in --}}
+                            @auth
+                            {{-- opening auth --}}
+                            @if ( $class->payments->where('user', auth()->user()->email)->where('payment_status',
+                            1)->where('event_link_id', $class->link_id)->first())
+                            {{-- if a user has made payment for the course.. display the message below --}}
+                            <label for="" class="my-2 text-success">Registration Successful</label>
+                            <p>
+                                <strong style="font-weight: 600; font-size: 14px">
+                                    The zoom link invite for this class would be sent to
+                                    your email. You can also find it in your dashboard, under <q>Courses Registered</q>
+                                    menu. For further enquires, send us a mail at
+                                    <a href="mailto:support@midastouchacademy.com">support@midastouchacademy.com</a>.
+                                </strong>
+                            </p>
+                            @else
+                            @if (boolval(auth()->user()->email_verified))
+                            {{-- if the user is a verified user that's yet to make payment, display payment button below --}}
+                            <p class="text-warning" style="font-weight: 600">Registration ends
+                                {{ date('jS\ F, Y', strtotime($class->end_registration)) }}</p>
+                            <article>
+                                <strong>
+                                    Lectures would be held live via a zoom class. To participate in the lectures, after
+                                    payment has been made and confirmed, the link to the live zoom class will be sent to
+                                    your email address.
+                                </strong>
+                            </article>
+                            <a href="{{ route('make_payment',  $class->link_id) }}" class="btn btn-success mt-3">
+                                Proceed with payment
+                            </a>
+                            @else
+                            {{-- if the user hasn't verified their account, display a button below that sends a verification mail --}}
+                            <p class="mt-3">
+                                <strong style="font-weight: 600; font-size: 14px">
+                                    You haven't verified your email.
+                                    Your email has to be verified before
+                                    you can register for a class. Click on the button below to resend verification link
+                                    to
+                                    your mail.
+                                </strong>
+                            </p>
+                            <form action="{{ route('reverify') }}" method="post">
+                                @csrf
+                                <button class="btn btn-dark">Send Verification Mail</button>
+                            </form>
+                            @endif
+                            @endif
+                            @else
+                            <p class="mt-3"><strong>N:B: You need to be logged in to register for this class.</strong>
+                            </p>
+                            <a href="{{ route('login') }}" class="btn btn-default">Login</a>
+                            {{-- closing auth --}}
+                            @endauth
+
+                            @endif
+                            @endif
 
                     </article>
 

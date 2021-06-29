@@ -1,6 +1,18 @@
 @import "./variables.scss";
 main {
     &#dashboard {
+        .pagination {
+            .page-link {
+                width: fit-content;
+                height: fit-content;
+                border-radius: 0px !important;
+                padding: 0.6em 0.8em;
+            }
+            .page-item.active * {
+                background-color: #172b4d;
+                border-color: #172b4d;
+            }
+        }
         .card-profile-image {
             z-index: 10;
             img {

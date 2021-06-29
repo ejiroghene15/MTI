@@ -24,9 +24,9 @@
                         <input type="text" name="course_background" class="form-control" required>
                     </div>
 
-                    <div class="form-group">
+                    <div class="form-group d-none">
                         <label for="">Assign Tutor</label>
-                        <select name="tutor" class="form-control form-control-alternative" required>
+                        <select name="tutor" class="form-control form-control-alternative">
                             @foreach ($users as $user)
                             @if (Str::lower($user->role) == "tutor")
                             <option value="{{ $user->id }}">{{ "$user->first_name $user->last_name" }}</option>
@@ -115,7 +115,7 @@
                                         </div>
                                         <div class="form-group">
                                             <label for="">Assign Tutor</label>
-                                            <select name="tutor" class="form-control form-control-alternative" required>
+                                            <select name="tutor" class="form-control form-control-alternative">
                                                 @foreach ($users as $user)
                                                 @if (Str::lower($user->role) == "tutor")
                                                 <option value="{{ $user->id }}" @if($course->tutor_id == $user->id)

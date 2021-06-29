@@ -17,7 +17,8 @@ class User extends Controller
     public function profile()
     {
         $user = auth()->user();
-        return view('pages.dashboard.index')->withUser($user);
+        $courses_registered = $user->courses_registered->where('event_type', 'class')->where('payment_status', 1);
+        return view('pages.dashboard.index', compact('user', 'courses_registered'));
     }
 
     public function updateProfile(Request $request)

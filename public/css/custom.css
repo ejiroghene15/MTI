@@ -390,7 +390,7 @@ body *:not(.fa, .ni) {
 }
 #course_page .about_course {
   position: relative;
-  margin-top: -35vh;
+  margin-top: -15em;
   margin-bottom: 5em;
   gap: 2em;
 }
@@ -1109,9 +1109,6 @@ body *:not(.fa, .ni) {
   font-size: 14px;
 }
 
-#general_footer {
-  border-top: 1px solid rgba(221, 221, 221, 0.268);
-}
 #general_footer nav a {
   color: #fff;
   margin: 0 10px;

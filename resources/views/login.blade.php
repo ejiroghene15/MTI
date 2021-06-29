@@ -14,46 +14,48 @@
         <div class="nav-wrapper">
             <ul class="nav nav-pills nav-fill flex-column flex-md-row" role="tablist">
                 <li class="nav-item">
-                    <a class="nav-link mb-sm-3 mb-md-0 @if(!session('register')) active @endif" data-toggle="tab"
-                        href="#tab-login" role="tab" aria-selected="true">
+                    <a class="nav-link text-uppercase mb-sm-3 mb-md-0 @if(!session('register')) active @endif"
+                        data-toggle="tab" href="#tab-login" role="tab" aria-selected="true">
                         Login
                     </a>
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link mb-sm-3 mb-md-0 @if(session('register')) active @endif" data-toggle="tab"
-                        href="#tab-register" role="tab" aria-selected="false">Register</a>
+                    <a class="nav-link text-uppercase mb-sm-3 mb-md-0 @if(session('register')) active @endif"
+                        data-toggle="tab" href="#tab-register" role="tab" aria-selected="false">Register</a>
                 </li>
             </ul>
         </div>
 
         <div class="tab-content">
+            {{-- login section --}}
             <div class="tab-pane fade @if(!session('register')) show active @endif" id="tab-login" role="tabpanel">
                 <form action="{{ route('authenticate_user') }}" method="post">
                     @csrf
                     <div class="form-wrapper">
-                        <header>Login </header>
+                        <header class="text-uppercase">Login </header>
                         <div class="form-group">
+                            <label for="">Email Address</label>
                             <div class="input-group input-group-alternative">
-                                <div class="input-group-prepend">
-                                    <span class="input-group-text"><i class="ni ni-email-83"></i></span>
-                                </div>
-                                <input class="form-control" placeholder="Email Address" type="email" name="email"
-                                    autocomplete="off">
+                                <input class="form-control" type="email" name="email" autocomplete="off">
                             </div>
                         </div>
 
                         <div class="form-group">
+                            <label for="">Password</label>
                             <div class="input-group input-group-alternative">
-                                <div class="input-group-prepend">
-                                    <span class="input-group-text"><i class="ni ni-lock-circle-open"></i></span>
-                                </div>
                                 <input class="form-control" placeholder="Password" type="password" name="password">
                             </div>
                         </div>
 
                         <div class="form-group mb-0 mt-4">
-                            <button class="btn btn-default text-capitalize">Log in</button>
+                            <button class="btn btn-default btn-block">Sign in with Email</button>
+                        </div>
+                        <div class="form-group mb-0 my-4">
+                            <a href="{{ route('oauth-google') }}" class="btn btn-neutral btn-icon btn-block">
+                                <span class="btn-inner--icon"><img src="/images/google.svg"></span>
+                                <span class="btn-inner--text">Sign in with Google</span>
+                            </a>
                         </div>
                     </div>
 
@@ -63,11 +65,12 @@
                 </form>
             </div>
 
+            {{-- registration section --}}
             <div class="tab-pane fade @if(session('register'))show active @endif" id="tab-register" role="tabpanel">
                 <form action="{{ route('new_registration') }}" method="post">
                     @csrf
                     <div class="form-wrapper">
-                        <header>Create an account </header>
+                        <header class="text-uppercase">Create an account </header>
                         <div class="form-row">
                             <div class="col-md-6">
                                 <div class="form-group">
