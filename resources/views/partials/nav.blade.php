@@ -71,7 +71,6 @@
                         <a class="nav-link nav-link-icon d-block d-lg-none" href="#" role="button"
                             data-toggle="dropdown" aria-haspopup="false">
                             {{ auth()->user()->first_name }} {{ auth()->user()->last_name }}
-
                             <i class="ni ni-bold-down"></i>
                         </a>
                         <div class="dropdown-menu dropdown-menu-right">

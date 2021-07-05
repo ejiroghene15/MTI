@@ -35,6 +35,12 @@
     opacity: 1;
   }
 }
+ul {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+
 .pri-color-alt {
   background-color: #eebb1a;
   color: #fff;
@@ -48,7 +54,7 @@ html {
 body {
   height: 100%;
 }
-body *:not(.fa, .ni) {
+body *:not(.fa, .ni, .material-icons) {
   font-family: "Montserrat", sans-serif !important;
 }
 
@@ -87,7 +93,6 @@ body *:not(.fa, .ni) {
 }
 
 #main_header {
-  position: -webkit-sticky;
   position: sticky;
   top: 0;
   z-index: 1000;

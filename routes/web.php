@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin;
+use App\Http\Controllers\ArticlesController;
 use App\Http\Controllers\Auth;
 use App\Http\Controllers\General;
 use App\Http\Controllers\User;
@@ -17,7 +18,6 @@ use Laravel\Socialite\Facades\Socialite;
 | contains the "web" middleware group. Now create something great!
 |
 */
-
 
 Route::domain('admin.' . env('APP_URL'))->group(function () {
     Route::get('/', [Admin::class, 'logs']);
@@ -86,6 +86,8 @@ Route::domain(env('APP_URL'))->group(function () {
 
     Route::get('dasboard', [User::class, 'profile'])->name('dashboard');
 
+    Route::resource('articles', ArticlesController::class);
+
     Route::post('update_profile', [User::class, 'updateProfile'])->name('update_profile');
 
     Route::post('upload_profile_pix', [User::class, 'setProfilePix'])->name('upload_profile_pix');
@@ -115,9 +117,9 @@ Route::domain(env('APP_URL'))->group(function () {
         return new App\Mail\SendMail('registration', '1254');
     });
 
-    Route::get('oauth', function () {
-        return Socialite::driver('google')->redirect();
-    })->name('oauth-google');
+    // Route::get('oauth', function () {
+    //     return Socialite::driver('google')->redirect();
+    // })->name('oauth-google');
 
-    Route::get('oauth-verify', [Auth::class, 'oAuth']);
+    // Route::get('oauth-verify', [Auth::class, 'oAuth']);
 });

@@ -1,60 +1,169 @@
 @import "./variables.scss";
+
+.nav {
+    box-shadow: 1px 0px 15px #eff1f5;
+    height: 50px;
+    display: table;
+    width: 100%;
+    position: relative;
+    padding: 0.5em;
+    &-icon {
+        img {
+            height: 50px;
+        }
+    }
+    &-text {
+        display: table-cell;
+        vertical-align: middle;
+        color: #fff;
+        font-weight: 600;
+    }
+}
+
 main {
-    &#dashboard {
-        .pagination {
-            .page-link {
-                width: fit-content;
-                height: fit-content;
-                border-radius: 0px !important;
-                padding: 0.6em 0.8em;
-            }
-            .page-item.active * {
-                background-color: #172b4d;
-                border-color: #172b4d;
-            }
-        }
-        .card-profile-image {
-            z-index: 10;
-            img {
-                transform: translate(-50%, -50%) !important;
-                width: 170px !important;
-                height: 170px !important;
-                padding: 10px;
-                object-fit: cover;
-            }
-        }
-        .section-profile-cover {
-            @media screen and (min-width: 620px) {
-                &::after {
-                    position: absolute;
-                    content: "";
-                    height: 100%;
+    display: grid;
+    grid-template-columns: 80px 1fr;
+    align-items: flex-start;
+
+    .sidebar {
+        min-height: 100px;
+        border-radius: 5px;
+        position: relative;
+
+        &-left {
+            background-color: #c6d9f947;
+            box-shadow: 0px 0px 5px #172b4d3d;
+            height: 100%;
+            ul {
+                display: flex;
+                flex-direction: column;
+
+                li {
+                    margin: 1.3em auto;
+                    text-align: center;
                     width: 100%;
-                    top: 0;
-                    left: 0;
-                    background-color: #010d219e;
+                    &:last-child {
+                        position: absolute;
+                        bottom: 0;
+                        a {
+                            background-color: #df405a !important;
+                            color: white;
+                            box-shadow: 0px 0px 4px #98252599;
+                        }
+                    }
+                    @include mqh(600) {
+                        margin: 1.5em auto 0;
+                        &:last-child {
+                            bottom: 5px;
+                        }
+                    }
+                    a {
+                        text-decoration: none !important;
+                        font-weight: 600;
+                        height: 50px;
+                        width: 50px;
+                        margin: auto;
+                        box-shadow: 0px 0px 100px #172b4d3d;
+                        background-color: transparent;
+                        color: #12408eb5;
+                        display: flex;
+                        border-radius: 50%;
+                        justify-content: center;
+                        align-items: center;
+                        transition: background-color 0.1s 0s linear,
+                            color 0.2s 0s linear;
+                        &:hover {
+                            background-color: #426fbb;
+                            color: white;
+                            box-shadow: 0px 0px 4px #070f1df0;
+                        }
+                    }
                 }
             }
         }
-        @include mq(520) {
-            .card-profile {
-                margin-top: -40vh !important;
-            }
-            .profile-tab {
-                text-transform: capitalize;
+    }
+
+    .content {
+        header[for="date"] {
+            padding: 0.5em 1em;
+            > p {
+                font-weight: 600;
+                font-size: 1.3em;
+                margin: 0.5em 0 0;
             }
         }
-        .form-wrapper {
-            padding: 3vh 3vw 0;
-            @include mq(768) {
-                padding: 0;
+
+        &-body {
+            display: grid;
+            grid-template-columns: 1fr 400px;
+            padding: 1em;
+            gap: 1em;
+            .event {
+                background-image: linear-gradient(
+                    315deg,
+                    #b1bfd8 0%,
+                    #6782b4 74%
+                );
+                padding: 1em;
+                border-radius: 15px;
+                display: flex;
+                gap: 1em;
+                &-img {
+                    position: relative;
+                    width: 300px;
+                    aspect-ratio: 2 / 1.5;
+                    img {
+                        width: 100%;
+                        height: 100%;
+                        border-radius: 30px 70px / 20% 10%;
+                    }
+                }
+                &-caption {
+                    margin-top: 1.3em;
+                    .coming-soon {
+                        margin: 0;
+                        color: white;
+                        font-weight: 600;
+                    }
+                    p {
+                        font-weight: 600;
+                        color: #fff;
+                        font-size: 2em;
+                        margin: 0;
+                        &.small-text {
+                            margin: 0;
+                            font-size: 1em;
+                        }
+                    }
+                }
             }
-            background-color: #f4f5f7;
-        }
-        .form-error {
-            font-size: 14px;
-            font-weight: 500;
-            color: #f5365cc7;
+            .sidebar {
+                background-color: #d9e4f5;
+                background-image: linear-gradient(
+                    315deg,
+                    #d9e4f5 0%,
+                    #f5e3e6 74%
+                );
+                box-shadow: 0px 0px 5px #172b4d3d;
+                height: 200px;
+                padding: 1em;
+                header {
+                    font-weight: 600;
+                    font-size: 1.5em;
+                }
+            }
         }
     }
+}
+
+.footer {
+    height: 50px;
+    display: table;
+    width: 100%;
+    position: relative;
+    background-color: $primary-color;
+    color: #fff;
+    font-size: 14px;
+    font-weight: 600;
+    text-align: center;
 }

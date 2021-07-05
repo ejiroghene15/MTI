@@ -1,9 +1,6 @@
-@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;800&display=swap");
 @import "./animations.scss";
 @import "./variables.scss";
 
-$primary-color: #172b4d;
-$primary-color-alt: #eebb1a;
 
 .pri-color-alt {
     background-color: $primary-color-alt;
@@ -18,10 +15,11 @@ html {
 body {
     height: 100%;
     // font-family: "Poppins", sans-serif;
-    *:not(.fa, .ni) {
+    *:not(.fa, .ni, .material-icons) {
         font-family: "Montserrat", sans-serif !important;
     }
 }
+
 .sections:is(.container, .container-fluid) {
     @include mq(768) {
         padding-left: 0 !important;
@@ -550,7 +548,7 @@ body {
                 }
             }
         }
-    } 
+    }
 }
 
 #courses_all {
