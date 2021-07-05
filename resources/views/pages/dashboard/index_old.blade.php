@@ -2,7 +2,7 @@
 @section('title', "Dashboard | $user->first_name")
 @section('styles')
 @parent
-<link rel="stylesheet" href="/css/dashboard.css">
+<link rel="stylesheet" href="/css/dashboard_old.css">
 <link rel="stylesheet" href="/css/dropify.min.css">
 <link rel="stylesheet"
     href="https://cdn.datatables.net/v/bs4/dt-1.10.24/r-2.2.7/sb-1.0.1/sp-1.2.2/datatables.min.css" />
