@@ -2,11 +2,16 @@
 
 $primary-color: #172b4d;
 $primary-color-alt: #eebb1a;
+$box-shadow: 0px 0px 5px #172b4d3d;
+$alt-gradient-bg: linear-gradient(315deg, #d9e4f5 0%, #f5e3e6 74%);
 
-ul{
+ul {
     padding: 0;
     margin: 0;
     list-style: none;
+}
+.error-display {
+    font-size: 14px;
 }
 
 @mixin mq($arg) {
@@ -44,4 +49,3 @@ ul{
         border-radius: 30px;
     }
 }
-

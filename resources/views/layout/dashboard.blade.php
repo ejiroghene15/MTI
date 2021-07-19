@@ -29,39 +29,50 @@
 <main>
     {{-- sidebar navigation --}}
     <aside class="sidebar sidebar-left">
-
         <ul>
             <li>
-                <a href="#">
+                <a href="/dashboard" class="{{ @$index_active }}">
                     <span class="material-icons">
                         dashboard
                     </span>
+                    <span class="icon">
+                        <img src="{{ asset('images/icons/dashboard.png') }}" alt="">
+                    </span>
                 </a>
             </li>
             <li>
-                <a href="{{ route('articles.index') }}">
+                <a href="{{ route('articles.index') }}" class="{{ @$articles_active }}">
                     <span class="material-icons">
                         article
                     </span>
-                </a>
-            </li>
-            <li>
-                <a href="#">
-                    <span class="material-icons">
-                        person
+                    <span class="icon">
+                        <img src="{{ asset('images/icons/article.png') }}" alt="">
                     </span>
                 </a>
             </li>
             <li>
-                <a href="#">
+                <a href="#" class="{{ @$profile_active }}">
+                    <span class="material-icons">
+                        person
+                    </span>
+                    <span class="icon">
+                        <img src="{{ asset('images/icons/user.png') }}" alt="">
+                    </span>
+                </a>
+            </li>
+            <li>
+                <a href="#" class="{{ @$settings_active }}">
                     <span class="material-icons">
                         settings
+                    </span>
+                    <span class="icon">
+                        <img src="{{ asset('images/icons/individual.png') }}" alt="">
                     </span>
                 </a>
             </li>
             <li>
                 <a href="{{ url('logout') }}">
-                    <span class="material-icons">
+                    <span class="material-icons" style="display: block">
                         power_settings_new
                     </span>
                 </a>
@@ -71,6 +82,59 @@
     </aside>
     @yield('content')
 </main>
+
+{{-- bottom nav --}}
+<nav id="bottom-nav">
+    <a href="/dashboard" class="nav-menu">
+        <span class="material-icons">
+            dashboard
+        </span>
+        <span class="icon">
+            <img src="{{ asset('images/icons/dashboard.png') }}" alt="">
+        </span>
+        <p>Dashboard</p>
+    </a>
+
+    <a href="{{ route('articles.index') }}" class="nav-menu">
+        <span class="material-icons">
+            article
+        </span>
+        <span class="icon">
+            <img src="{{ asset('images/icons/article.png') }}" alt="">
+        </span>
+        <p>Articles</p>
+    </a>
+
+    <a href="#" class="nav-menu">
+        <span class="material-icons">
+            person
+        </span>
+        <span class="icon">
+            <img src="{{ asset('images/icons/user.svg') }}" alt="">
+        </span>
+        <p>Profile</p>
+    </a>
+
+    <a href="#" class="nav-menu">
+        <span class="material-icons">
+            settings
+        </span>
+        <span class="icon">
+            <img src="{{ asset('images/icons/individual.png') }}" alt="">
+        </span>
+        <p>Settings</p>
+    </a>
+
+    <a href="{{ url('logout') }}" class="nav-menu">
+        <span class="material-icons">
+            power_settings_new
+        </span>
+        <span class="icon">
+            <img src="{{ asset('images/icons/logout.svg') }}" alt="">
+        </span>
+        <p>Log out</p>
+    </a>
+</nav>
 
 {{-- footer section --}}
 <footer class="footer">

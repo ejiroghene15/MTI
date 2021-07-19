@@ -51,12 +51,12 @@
                         <div class="form-group mb-0 mt-4">
                             <button class="btn btn-default btn-block">Sign in with Email</button>
                         </div>
-                        {{-- <div class="form-group mb-0 my-4">
+                        <div class="form-group mb-0 my-4">
                             <a href="{{ route('oauth-google') }}" class="btn btn-neutral btn-icon btn-block">
                                 <span class="btn-inner--icon"><img src="/images/google.svg"></span>
                                 <span class="btn-inner--text">Sign in with Google</span>
                             </a>
-                        </div> --}}
+                        </div>
                     </div>
 
                     <a type="button" class="btn btn-block text-default bg-light mb-3"

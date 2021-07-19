@@ -1,12 +1,27 @@
 @import "./variables.scss";
 
+.ck.ck-toolbar,
+.ck.ck-button,
+a.ck.ck-button,
+.ck.ck-toolbar__separator {
+    background-color: $primary-color !important;
+}
+
+.ck.ck-editor__editable_inline {
+    box-shadow: 0px 0px 5px #525f7f30 !important;
+    border-color: transparent !important;
+}
+
 .nav {
     box-shadow: 1px 0px 15px #eff1f5;
     height: 50px;
     display: table;
     width: 100%;
-    position: relative;
+    position: sticky;
+    top: 0;
     padding: 0.5em;
+    background-color: white;
+    z-index: 10;
     &-icon {
         img {
             height: 50px;
@@ -22,29 +37,29 @@
 
 main {
     display: grid;
-    grid-template-columns: 80px 1fr;
     align-items: flex-start;
-
     .sidebar {
-        min-height: 100px;
-        border-radius: 5px;
-        position: relative;
-
         &-left {
             background-color: #c6d9f947;
-            box-shadow: 0px 0px 5px #172b4d3d;
+            box-shadow: $box-shadow;
             height: 100%;
+            width: 80px;
+            min-height: 100px;
+            position: fixed;
+            @include mq(520) {
+                display: none;
+            }
             ul {
                 display: flex;
                 flex-direction: column;
 
                 li {
-                    margin: 1.3em auto;
+                    margin: 1em auto;
                     text-align: center;
                     width: 100%;
                     &:last-child {
                         position: absolute;
-                        bottom: 0;
+                        bottom: 110px;
                         a {
                             background-color: #df405a !important;
                             color: white;
@@ -72,8 +87,20 @@ main {
                         align-items: center;
                         transition: background-color 0.1s 0s linear,
                             color 0.2s 0s linear;
+                        .material-icons {
+                            display: none;
+                        }
+                        .icon {
+                            width: auto !important;
+                            height: auto !important;
+                            img {
+                                height: 23px;
+                                width: 23px;
+                            }
+                        }
+                        &.active,
                         &:hover {
-                            background-color: #426fbb;
+                            background-color: $primary-color;
                             color: white;
                             box-shadow: 0px 0px 4px #070f1df0;
                         }
@@ -84,8 +111,15 @@ main {
     }
 
     .content {
-        header[for="date"] {
-            padding: 0.5em 1em;
+        padding: 0 1em;
+        margin-bottom: 10em;
+        margin-left: 80px;
+        position: relative;
+        @include mq(520) {
+            margin-left: 0;
+        }
+        .content-header {
+            padding: 0.5em 0;
             > p {
                 font-weight: 600;
                 font-size: 1.3em;
@@ -139,11 +173,7 @@ main {
             }
             .sidebar {
                 background-color: #d9e4f5;
-                background-image: linear-gradient(
-                    315deg,
-                    #d9e4f5 0%,
-                    #f5e3e6 74%
-                );
+                background-image: $alt-gradient-bg;
                 box-shadow: 0px 0px 5px #172b4d3d;
                 height: 200px;
                 padding: 1em;
@@ -153,17 +183,191 @@ main {
                 }
             }
         }
+
+        .new-post {
+            gap: 2em;
+            padding: 1em;
+            box-shadow: 0px 0px 5px #525f7f30;
+            border-radius: 15px;
+            margin-top: -10px;
+            .post-thumbnail {
+                width: 400px;
+            }
+            .post-body {
+                flex: 1 1 0;
+                .form-group > label {
+                    font-weight: 600;
+                    color: #525f7f;
+                }
+            }
+            @include mq(1020) {
+                flex-direction: column;
+                .post-thumbnail {
+                    width: 100%;
+                }
+            }
+        }
+
+        .articles-overview {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, 400px);
+            @include mq(991) {
+                grid-template-columns: repeat(2, 40vmax);
+            }
+            @include mq(768) {
+                grid-template-columns: 1fr;
+            }
+            column-gap: 1em;
+            row-gap: 2em;
+            margin-top: 1em;
+            #create-post {
+                position: fixed;
+                z-index: 100;
+                box-shadow: $box-shadow;
+                aspect-ratio: 1 / 1;
+                width: 50px;
+                border-radius: 50%;
+                right: 20px;
+                top: 40%;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                transform: translateY(-50%);
+                background-image: $alt-gradient-bg;
+                &:hover {
+                    box-shadow: 0px 2px 10px #070e1a3f;
+                }
+                > a {
+                    position: relative;
+                    transform: translateY(4px);
+                    text-align: center;
+                    * {
+                        color: #525f7f;
+                    }
+                }
+            }
+            .post {
+                position: relative;
+                box-shadow: $box-shadow;
+                border-radius: 5px;
+                .thumbnail {
+                    margin: 0;
+                    img {
+                        width: 100%;
+                        height: 180px;
+                        object-fit: cover;
+                    }
+                }
+                .excerpt {
+                    padding: 0.8em;
+                    > * {
+                        font-weight: 600;
+                    }
+                    > p {
+                        margin: 0;
+                    }
+                    .title {
+                        font-size: 17px;
+                    }
+                    .author {
+                        font-size: 14px;
+                        padding-top: 0.5em;
+                        color: #525f7fa6;
+                        margin-bottom: 1em;
+                    }
+                    .category {
+                        float: right;
+                        font-size: 13px;
+                        padding: 0.5em 1em;
+                        background-image: $alt-gradient-bg;
+                        border-radius: 150px;
+                    }
+
+                    @include mq(480) {
+                        .title {
+                            font-size: 15px;
+                        }
+                        .author {
+                            font-size: 14px;
+                        }
+                    }
+
+                    a {
+                        font-size: 13px;
+                        padding-top: 0.5em;
+                        display: inline-block;
+                        span {
+                            vertical-align: middle;
+                            &.material-icons {
+                                position: relative;
+                                top: 1px;
+                                transition: 0.3s;
+                            }
+                        }
+                        &:hover {
+                            span.material-icons {
+                                transform: translateX(5px);
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+#bottom-nav {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    background-color: $primary-color;
+    display: none;
+    padding: 0.3em 0;
+    justify-content: space-evenly;
+    @include mq(520) {
+        display: flex;
+    }
+    .nav-menu {
+        color: whitesmoke !important;
+        display: inline-block;
+        text-align: center;
+        margin: 4px 0.7em 0;
+        .material-icons {
+            font-size: 20px;
+            display: none;
+        }
+        .icon img {
+            height: 20px;
+            width: 20px;
+            margin-bottom: 4px;
+        }
+        &:hover {
+            p {
+                transform: translateY(-2px);
+            }
+        }
+        p {
+            transform: translateY(0);
+            transition: 0.3s;
+            margin: 0;
+            font-size: 10px;
+            font-weight: 600;
+            white-space: nowrap;
+        }
     }
 }
 
 .footer {
-    height: 50px;
     display: table;
-    width: 100%;
+    overflow: hidden;
     position: relative;
     background-color: $primary-color;
     color: #fff;
     font-size: 14px;
     font-weight: 600;
     text-align: center;
+    padding: 0.9rem 0 !important ;
+    @include mq(520) {
+        display: none;
+    }
 }

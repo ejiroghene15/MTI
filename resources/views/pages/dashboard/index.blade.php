@@ -1,9 +1,12 @@
+@php
+$index_active = "active"
+@endphp
 @extends('layout.dashboard')
 @section('title', "Dashboard | $user->first_name")
 
 @section('content')
 <article class="content">
-    <header for="date">
+    <header class="content-header">
         <p>{{ date('l d, F', time()); }}</p>
     </header>
 

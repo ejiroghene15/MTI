@@ -4,3 +4,7 @@ ul {
   margin: 0;
   list-style: none;
 }
+
+.error-display {
+  font-size: 14px;
+}

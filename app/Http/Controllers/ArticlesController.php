@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Articles;
+use App\Models\Categories;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 
 class ArticlesController extends Controller
 {
@@ -16,6 +18,16 @@ class ArticlesController extends Controller
         $this->middleware('auth');
     }
 
+    public function imageUpload(Request $request)
+    {
+        $save_to_cloudinary = $request->upload->storeOnCloudinary('articles');
+        $upload_path = $save_to_cloudinary->getSecurePath();
+        return response()->json([
+            'uploaded' => true,
+            "url" => $upload_path,
+        ]);
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -23,7 +35,7 @@ class ArticlesController extends Controller
      */
     public function index()
     {
-        return view('articles.create');
+        return view('articles.index')->withArticles(Articles::all());
     }
 
     /**
@@ -33,7 +45,8 @@ class ArticlesController extends Controller
      */
     public function create()
     {
-        //
+        $categories = Categories::all();
+        return view('articles.create')->withCategories($categories);
     }
 
     /**
@@ -44,7 +57,23 @@ class ArticlesController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $article = $request->validate([
+            'category_id' => 'required',
+            'title' => 'required|unique:articles',
+            'body' => 'required',
+            'thumbnail' => 'required|image'
+        ], [
+            'required' => " A :attribute is needed for your post to be created",
+            'title.unique' => "An article with this title has alredy been created, please use a different title for your article"
+        ]);
+
+        $article['author_id'] = auth()->id();
+        $article['slug'] = Str::slug($request->title, '-');
+        $thumbnail = $request->thumbnail->storeOnCloudinaryAs('thumbnail', $article['slug']);
+        $article['thumbnail'] = $thumbnail->getSecurePath();
+
+        Articles::create($article);
+        return back()->withMessage("Your post has been created and is pending approval from an admin. You'll be notified once it's published")->withType("success");
     }
 
     /**
@@ -53,9 +82,9 @@ class ArticlesController extends Controller
      * @param  \App\Models\Articles  $articles
      * @return \Illuminate\Http\Response
      */
-    public function show(Articles $articles)
+    public function show(Articles $article)
     {
-        //
+        return view('articles.show', compact("article"));
     }
 
     /**
@@ -64,9 +93,8 @@ class ArticlesController extends Controller
      * @param  \App\Models\Articles  $articles
      * @return \Illuminate\Http\Response
      */
-    public function edit(Articles $articles)
+    public function edit(Articles $article)
     {
-        //
     }
 
     /**
@@ -87,7 +115,7 @@ class ArticlesController extends Controller
      * @param  \App\Models\Articles  $articles
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Articles $articles)
+    public function destroy(Articles $article)
     {
         //
     }

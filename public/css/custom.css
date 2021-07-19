@@ -41,6 +41,10 @@ ul {
   list-style: none;
 }
 
+.error-display {
+  font-size: 14px;
+}
+
 .pri-color-alt {
   background-color: #eebb1a;
   color: #fff;

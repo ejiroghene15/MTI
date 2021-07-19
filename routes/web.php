@@ -19,6 +19,14 @@ use Laravel\Socialite\Facades\Socialite;
 |
 */
 
+Route::get('test', function () {
+
+    $dateSrc = ' 01:50 pm ';
+    // $dateTime = new DateTime($dateSrc);
+
+    print_r(range("A", "Z"));
+});
+
 Route::domain('admin.' . env('APP_URL'))->group(function () {
     Route::get('/', [Admin::class, 'logs']);
     Route::post('create_course', [Admin::class, 'createCourse'])->name('create_course');
@@ -84,7 +92,7 @@ Route::domain(env('APP_URL'))->group(function () {
         return view('pages.tutors.application');
     })->name('become_a_tutor');
 
-    Route::get('dasboard', [User::class, 'profile'])->name('dashboard');
+    Route::get('dashboard', [User::class, 'profile'])->name('dashboard');
 
     Route::resource('articles', ArticlesController::class);
 
@@ -117,9 +125,9 @@ Route::domain(env('APP_URL'))->group(function () {
         return new App\Mail\SendMail('registration', '1254');
     });
 
-    // Route::get('oauth', function () {
-    //     return Socialite::driver('google')->redirect();
-    // })->name('oauth-google');
+    Route::get('oauth', function () {
+        return Socialite::driver('google')->redirect();
+    })->name('oauth-google');
 
-    // Route::get('oauth-verify', [Auth::class, 'oAuth']);
+    Route::get('oauth-verify', [Auth::class, 'oAuth']);
 });

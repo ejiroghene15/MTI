@@ -5,6 +5,10 @@ ul {
   list-style: none;
 }
 
+.error-display {
+  font-size: 14px;
+}
+
 main#dashboard .pagination .page-link {
   width: -webkit-fit-content;
   width: -moz-fit-content;
