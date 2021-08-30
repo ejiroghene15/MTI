@@ -17,8 +17,7 @@ class User extends Controller
     public function profile()
     {
         $user = auth()->user();
-        $courses_registered = $user->courses_registered->where('event_type', 'class')->where('payment_status', 1);
-        return view('pages.dashboard.index', compact('user', 'courses_registered'));
+        return view('profile.edit', compact('user'));
     }
 
     public function updateProfile(Request $request)
@@ -37,6 +36,10 @@ class User extends Controller
 
         ModelsUser::where('email', auth()->user()->email)->update([
             'phone_number' => $request->phone,
+            'facebook' => $request->facebook,
+            'twitter' => $request->twitter,
+            'linkedin' => $request->linkedin,
+            'reddit' => $request->reddit,
             'bio' => $request->bio,
             'first_name' => $request->fname,
             'last_name' => $request->lname
@@ -47,6 +50,7 @@ class User extends Controller
 
     public function setProfilePix(Request $request)
     {
+
         $user = auth()->user()->email;
 
         $_validate_file = Validator::make($request->only('profilepix'), [
@@ -90,5 +94,12 @@ class User extends Controller
         ]);
 
         return back()->withMessage("Password changed. You'll be required to sign in with your new password when logging another time ")->withType('success');
+    }
+
+    public function settings()
+    {
+        $user = auth()->user();
+        $courses_registered = $user->courses_registered->where('event_type', 'class')->where('payment_status', 1);
+        return view('profile.settings', compact('user', 'courses_registered'));
     }
 }

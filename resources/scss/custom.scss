@@ -63,10 +63,11 @@ body {
     top: 0;
     z-index: 1000;
     #general_nav {
+        padding: .5rem !important;
         .navbar-brand {
             font-size: 1.2em;
             img {
-                height: 50px;
+                height: 40px;
             }
         }
         .nav-link {

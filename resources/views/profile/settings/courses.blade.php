@@ -1,4 +1,4 @@
-<div class="table-responsive mb-4">
+<div class="table-responsive my-4">
     <table class="dt table table-striped table-bordered w-100 overflow-auto">
         <thead class="bg-default text-light">
             <tr>

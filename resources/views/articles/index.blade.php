@@ -19,6 +19,7 @@ $articles_active = "active"
             </a>
         </aside>
         @forelse ($articles as $article)
+        @if ($article->status == "Published")
         <article class="post">
             <figure class="thumbnail">
                 <img src="{{ $article->thumbnail }}" alt="article image">
@@ -26,7 +27,7 @@ $articles_active = "active"
 
             <article class="excerpt">
                 <p class="title">{{ $article->title }}</p>
-                <p class="author">{{ "{$article->user->first_name}  {$article->user->last_name}" }}</p>
+                <p class="author">{{ "{$article->author->first_name}  {$article->author->last_name}" }}</p>
                 <a href="{{ route('articles.show', $article->slug) }}">
                     <span>Read article </span>
                     <span class="material-icons">
@@ -36,6 +37,7 @@ $articles_active = "active"
                 <span class="category">{{ $article->category->category }}</span>
             </article>
         </article>
+        @endif
         @empty
         @endforelse
 

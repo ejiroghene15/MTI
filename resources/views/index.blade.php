@@ -22,7 +22,7 @@
         </section>
     </section>
 
-    <div class="container-fluid my-5 sections">
+    <div class="container-fluid my-5 sections d-none">
         <div class="card-body">
             @if ($class)
             <div class="row">
@@ -91,7 +91,7 @@
         </div>
     </div>
 
-    <section for="tutors" class="tutors_section my-5" id="tutors">
+    <section for="tutors" class="tutors_section my-5 d-none" id="tutors">
         <div class="bg-default">
             <article class="card-body ">
                 <h3 class="text-center font-weight-bold label"> Our Tutors</h3>
@@ -129,7 +129,7 @@
         </div>
     </section>
 
-    <div class="container-fluid my-5 sections">
+    <div class="container-fluid my-5 sections d-none">
         <section for="blog-posts" class="card-body my-5">
             <h4 class="text-default font-weight-bold mb-4">Blog Posts</h4>
 

@@ -5,12 +5,17 @@ $created = strtotime($article->created_at);
 @extends('layout.dashboard')
 @section('title', "Article - $article->title")
 
+@can('view', $article)
 @section('content')
 <div class="content">
     <section for="alert">
-        @if (session('message'))
-        <x-alert :type="session('type')" :message="session('message') " />
-        @endif
+        <div class="alert alert-info alert-dismissible fade show" role="alert">
+            <span class="alert-inner--icon mr-1"><i class="ni ni-bell-55"></i></span>
+            <span class="alert-inner--text"><strong>Post Status: {{ $article->status }}</strong> </span>
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">×</span>
+            </button>
+        </div>
     </section>
 
     <div class="full-article">
@@ -33,47 +38,10 @@ $created = strtotime($article->created_at);
         <div class="page">
             <section class="body">
                 <article>{!! $article->body !!} </article>
-
-                @can('update', $article)
                 <a href="{{ route('articles.edit', $article) }}" class="btn btn-sm btn-primary">
                     Edit Post
                 </a>
-                @endcan
-
-                <form method="POST" action="{{ route('comment', $article->slug) }}" for="comment-box" class="mt-4">
-                    @csrf
-                    <div class="form-group">
-                        <label for="" style="font-weight: 600">Leave a Comment</label>
-                        <textarea name="comment" rows="7" class="form-control"></textarea>
-                    </div>
-                    <div class="form-group">
-                        <button class="btn btn-success" name="post_comment">Post Comment</button>
-                    </div>
-                </form>
-
-                <article class="comments mt-3">
-                    @if (count($article->comments))
-                    <header class="content-header">
-                        <p style="font-size: 17px"> COMMENTS</p>
-                    </header>
-                    <div class="comment-scroll">
-                        @foreach ($article->comments as $comment)
-                        <div class="card mb-4 shadow-sm user-replies">
-                            <div class="px-3 py-2">
-                                <p class="mb-1" style="font-weight: 600">
-                                    {{ "{$comment->user->first_name} {$comment->user->last_name}" }}
-                                </p>
-                                <small>
-
-                                </small>
-                                <p class="mb-0" style="font-size: 14px">{{ $comment->comment }}</p>
-                            </div>
-                        </div>
-                        @endforeach
-                    </div>
-                    @endif
-                </article>
-
+                <h5 class="mt-3">This is a preview display of your article</h5>
             </section>
 
             <aside class="author">
@@ -84,7 +52,8 @@ $created = strtotime($article->created_at);
                         <span class="role">Author</span>
                     </div>
                 </header>
-                @if ($article->author->facebook || $article->author->twitter || $article->author->linkedin || $article->author->reddit)
+                @if ($article->author->facebook || $article->author->twitter || $article->author->linkedin ||
+                $article->author->reddit)
 
                 <footer>
                     <p class="m-0 pt-2" style="font-weight: 600; font-size: 15px">Connect with Author </p>
@@ -120,40 +89,8 @@ $created = strtotime($article->created_at);
 
             </aside>
         </div>
-
     </div>
-
-
-    @if (count($related_articles))
-
-    <section for="related-articles">
-        <header class="content-header mt-3">
-            <p> Related Articles</p>
-        </header>
-
-        <div class="articles-overview">
-            @foreach ($related_articles as $article)
-            <article class="post">
-                <figure class="thumbnail">
-                    <img src="{{ $article->thumbnail }}" alt="article image">
-                </figure>
-
-                <article class="excerpt">
-                    <p class="title">{{ $article->title }}</p>
-                    <p class="author">{{ "{$article->author->first_name}  {$article->author->last_name}" }}</p>
-                    <a href="{{ route('articles.show', $article->slug) }}">
-                        <span>Read article </span>
-                        <span class="material-icons">
-                            arrow_right_alt
-                        </span>
-                    </a>
-                    <span class="category">{{ $article->category->category }}</span>
-                </article>
-            </article>
-            @endforeach
-        </div>
-    </section>
-    @endif
 
 </div>
 @endsection
+@endcan

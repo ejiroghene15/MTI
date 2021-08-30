@@ -1,10 +1,11 @@
 <footer class="bg-default px-3 pt-4 pb-1" id="general_footer">
     <nav class="d-flex pb-2">
-        <span>
-            <a href="/blog">Blog</a>
+        <p class="text-center text-light mb-2"> &copy; {{ date("Y") }} Midas Touch Academy</p>
+        <span class="d-none">
+            <a href="/blog" class="d-none">Blog</a>
             <a href="{{ route('about') }}">About Us</a>
-            <a href="{{ route('our_team') }}">Our Team</a>
-            <a href="{{ route('tutors') }}">Tutors</a>
+            <a href="{{ route('our_team') }}" class="d-none">Our Team</a>
+            <a href="{{ route('tutors') }}" class="d-none">Tutors</a>
             <a href="{{ route('become_a_tutor') }}" class="d-none">Become a Tutor</a>
         </span>
         <span class="ml-auto social">
@@ -20,5 +21,5 @@
             </a>
         </span>
     </nav>
-    <p class="text-center text-light mb-2"> &copy; {{ date("Y") }} Midas Touch Academy</p>
+    <p class="text-center text-light d-none mb-2"> &copy; {{ date("Y") }} Midas Touch Academy</p>
 </footer>

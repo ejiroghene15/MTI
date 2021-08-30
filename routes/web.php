@@ -92,9 +92,18 @@ Route::domain(env('APP_URL'))->group(function () {
         return view('pages.tutors.application');
     })->name('become_a_tutor');
 
-    Route::get('dashboard', [User::class, 'profile'])->name('dashboard');
+    Route::post('comment/{article}', [ArticlesController::class, 'comment'])->name('comment');
+
+    // * Only the author of an article can preview it
+    Route::get('articles/preview/{article}', [ArticlesController::class, 'previewPost'])->name('preview');
 
     Route::resource('articles', ArticlesController::class);
+
+    Route::get('dashboard', [User::class, 'profile'])->name('dashboard');
+
+    Route::get('dashboard/profile', [User::class, 'profile'])->name('my_profile');
+
+    Route::get('dashboard/settings', [User::class, 'settings'])->name('settings');
 
     Route::post('update_profile', [User::class, 'updateProfile'])->name('update_profile');
 

@@ -101,11 +101,14 @@ body *:not(.fa, .ni, .material-icons) {
   top: 0;
   z-index: 1000;
 }
+#main_header #general_nav {
+  padding: 0.5rem !important;
+}
 #main_header #general_nav .navbar-brand {
   font-size: 1.2em;
 }
 #main_header #general_nav .navbar-brand img {
-  height: 50px;
+  height: 40px;
 }
 #main_header #general_nav .nav-link {
   font-weight: 600;

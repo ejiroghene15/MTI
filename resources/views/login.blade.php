@@ -196,12 +196,11 @@
 
 </main>
 
-@include('partials.footer')
+{{-- @include('partials.footer') --}}
 @endsection
 
 @section('js')
 @parent
-
 @if(session('verified'))
 <script>
     swal("Account Verified", "You can proceed to login!", "success");

@@ -20,7 +20,7 @@ class Articles extends Model
         return 'slug';
     }
 
-    function user()
+    function author()
     {
         return $this->belongsTo(User::class, 'author_id');
     }
@@ -28,5 +28,10 @@ class Articles extends Model
     function category()
     {
         return $this->belongsTo(Categories::class, 'category_id');
+    }
+
+    function comments()
+    {
+        return $this->hasMany(Comments::class, 'post_id');
     }
 }

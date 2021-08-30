@@ -57,7 +57,7 @@ main {
                     margin: 1em auto;
                     text-align: center;
                     width: 100%;
-                    &:last-child {
+                    &.logout {
                         position: absolute;
                         bottom: 110px;
                         a {
@@ -115,9 +115,25 @@ main {
         margin-bottom: 10em;
         margin-left: 80px;
         position: relative;
+
         @include mq(520) {
             margin-left: 0;
         }
+
+        // * overwrite datatable pagination
+        .pagination {
+            .page-link {
+                width: fit-content;
+                height: fit-content;
+                border-radius: 0px !important;
+                padding: 0.6em 0.8em;
+            }
+            .page-item.active * {
+                background-color: #172b4d;
+                border-color: #172b4d;
+            }
+        }
+
         .content-header {
             padding: 0.5em 0;
             > p {
@@ -190,6 +206,14 @@ main {
             box-shadow: 0px 0px 5px #525f7f30;
             border-radius: 15px;
             margin-top: -10px;
+            &.edit {
+                .dropify-wrapper .dropify-preview {
+                    z-index: 23 !important;
+                    img {
+                        width: 100%;
+                    }
+                }
+            }
             .post-thumbnail {
                 width: 400px;
             }
@@ -313,6 +337,159 @@ main {
                 }
             }
         }
+
+        .full-article {
+            > .content-header {
+                color: #fff;
+                background-size: 100% 100%;
+                background-position: center center;
+                background-repeat: no-repeat;
+                padding-left: 1em;
+                padding-right: 1em;
+                padding-bottom: 1em;
+                position: relative;
+                &::before {
+                    content: "";
+                    position: absolute;
+                    height: 100%;
+                    width: 100%;
+                    inset: 0;
+                    background-color: rgba(0, 0, 0, 0.5);
+                }
+            }
+            .article-info {
+                position: relative;
+                .icon {
+                    img {
+                        height: 25px;
+                        width: 25px;
+                    }
+                    ~ span {
+                        vertical-align: middle;
+                    }
+                }
+                .author,
+                .date {
+                    font-size: 14px;
+                    font-weight: 600;
+                    opacity: 0.7;
+                }
+            }
+            .page {
+                display: grid;
+                grid-template-columns: 1fr 300px;
+                column-gap: 1.5em;
+                margin-top: 0.8em;
+                background-color: #fff;
+                @include mq(850) {
+                    grid-template-columns: 1fr;
+                }
+                section.body {
+                    p {
+                        font-size: 15px;
+                        line-height: 2;
+                    }
+
+                    .comments {
+                        .comment-scroll {
+                            max-height: 400px;
+                            overflow-y: scroll;
+                            @include invisible_scrollbar;
+                        }
+                        .user-replies {
+                            position: relative;
+                            &::before,
+                            &::after {
+                                position: absolute;
+                                height: 50%;
+                                width: 5px;
+                                content: "";
+                            }
+                            &::before {
+                                top: 0;
+                                border-top-left-radius: 0.25em;
+                                background-color: #94c997;
+                                background-image: linear-gradient(
+                                    315deg,
+                                    #94c997 0%,
+                                    #daacec 74%
+                                );
+                            }
+                            &::after {
+                                bottom: 0;
+                                left: 0;
+                                border-bottom-left-radius: 0.25em;
+                                background-color: #d9e4f5;
+                                background-image: linear-gradient(
+                                    315deg,
+                                    #d9e4f5 0%,
+                                    #f5e3e6 74%
+                                );
+                            }
+                        }
+                    }
+                }
+
+                aside.author {
+                    box-shadow: $box-shadow;
+                    background-color: #fff;
+                    padding: 1em 0.5em;
+                    top: -3em;
+                    position: relative;
+                    border-radius: 20% 0px 10% 10% / 30px;
+                    align-self: baseline;
+                    @include mq(850) {
+                        display: none;
+                    }
+                    header {
+                        display: flex;
+                        align-items: center;
+                        column-gap: 0.5em;
+                        margin-top: -20px;
+                        img {
+                            width: 80px;
+                            aspect-ratio: 1 /1;
+                            border-radius: 50%;
+                            object-fit: cover;
+                            margin-left: -1.2em;
+                            position: relative;
+                            top: -5px;
+                        }
+                        .name {
+                            font-weight: 600;
+                            opacity: 0.7;
+                        }
+                        .role {
+                            font-size: 10px;
+                            padding: 0.4em 0.8em 0.5em;
+                            background-image: $alt-gradient-bg;
+                            border-radius: 150px;
+                            font-weight: 600;
+                            margin-top: 4px;
+                            display: inline-block;
+                        }
+                    }
+                    footer {
+                        .socials {
+                            margin: 0;
+                            margin-top: 0.5em;
+                            img {
+                                aspect-ratio: 1 /1;
+                                width: 30px;
+                                margin: 0 0.3em;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        // * settings page
+        &.settings {
+            .nav-link.active {
+                background-color: $primary-color !important;
+            }
+        }
     }
 }
 
@@ -366,6 +543,7 @@ main {
     font-size: 14px;
     font-weight: 600;
     text-align: center;
+    height: 25px;
     padding: 0.9rem 0 !important ;
     @include mq(520) {
         display: none;

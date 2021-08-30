@@ -68,11 +68,11 @@ main .sidebar-left ul li {
   text-align: center;
   width: 100%;
 }
-main .sidebar-left ul li:last-child {
+main .sidebar-left ul li.logout {
   position: absolute;
   bottom: 110px;
 }
-main .sidebar-left ul li:last-child a {
+main .sidebar-left ul li.logout a {
   background-color: #df405a !important;
   color: white;
   box-shadow: 0px 0px 4px #98252599;
@@ -126,6 +126,20 @@ main .content {
   main .content {
     margin-left: 0;
   }
+}
+main .content .pagination .page-link {
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
+  height: -webkit-fit-content;
+  height: -moz-fit-content;
+  height: fit-content;
+  border-radius: 0px !important;
+  padding: 0.6em 0.8em;
+}
+main .content .pagination .page-item.active * {
+  background-color: #172b4d;
+  border-color: #172b4d;
 }
 main .content .content-header {
   padding: 0.5em 0;
@@ -193,6 +207,12 @@ main .content .new-post {
   box-shadow: 0px 0px 5px #525f7f30;
   border-radius: 15px;
   margin-top: -10px;
+}
+main .content .new-post.edit .dropify-wrapper .dropify-preview {
+  z-index: 23 !important;
+}
+main .content .new-post.edit .dropify-wrapper .dropify-preview img {
+  width: 100%;
 }
 main .content .new-post .post-thumbnail {
   width: 400px;
@@ -319,6 +339,143 @@ main .content .articles-overview .post .excerpt a span.material-icons {
 main .content .articles-overview .post .excerpt a:hover span.material-icons {
   transform: translateX(5px);
 }
+main .content .full-article > .content-header {
+  color: #fff;
+  background-size: 100% 100%;
+  background-position: center center;
+  background-repeat: no-repeat;
+  padding-left: 1em;
+  padding-right: 1em;
+  padding-bottom: 1em;
+  position: relative;
+}
+main .content .full-article > .content-header::before {
+  content: "";
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+main .content .full-article .article-info {
+  position: relative;
+}
+main .content .full-article .article-info .icon img {
+  height: 25px;
+  width: 25px;
+}
+main .content .full-article .article-info .icon ~ span {
+  vertical-align: middle;
+}
+main .content .full-article .article-info .author,
+main .content .full-article .article-info .date {
+  font-size: 14px;
+  font-weight: 600;
+  opacity: 0.7;
+}
+main .content .full-article .page {
+  display: grid;
+  grid-template-columns: 1fr 300px;
+  -moz-column-gap: 1.5em;
+       column-gap: 1.5em;
+  margin-top: 0.8em;
+  background-color: #fff;
+}
+@media screen and (max-width: 850px) {
+  main .content .full-article .page {
+    grid-template-columns: 1fr;
+  }
+}
+main .content .full-article .page section.body p {
+  font-size: 15px;
+  line-height: 2;
+}
+main .content .full-article .page section.body .comments .comment-scroll {
+  max-height: 400px;
+  overflow-y: scroll;
+}
+main .content .full-article .page section.body .comments .comment-scroll::-webkit-scrollbar {
+  width: 0;
+  height: 0;
+}
+main .content .full-article .page section.body .comments .user-replies {
+  position: relative;
+}
+main .content .full-article .page section.body .comments .user-replies::before, main .content .full-article .page section.body .comments .user-replies::after {
+  position: absolute;
+  height: 50%;
+  width: 5px;
+  content: "";
+}
+main .content .full-article .page section.body .comments .user-replies::before {
+  top: 0;
+  border-top-left-radius: 0.25em;
+  background-color: #94c997;
+  background-image: linear-gradient(315deg, #94c997 0%, #daacec 74%);
+}
+main .content .full-article .page section.body .comments .user-replies::after {
+  bottom: 0;
+  left: 0;
+  border-bottom-left-radius: 0.25em;
+  background-color: #d9e4f5;
+  background-image: linear-gradient(315deg, #d9e4f5 0%, #f5e3e6 74%);
+}
+main .content .full-article .page aside.author {
+  box-shadow: 0px 0px 5px #172b4d3d;
+  background-color: #fff;
+  padding: 1em 0.5em;
+  top: -3em;
+  position: relative;
+  border-radius: 20% 0px 10% 10%/30px;
+  align-self: baseline;
+}
+@media screen and (max-width: 850px) {
+  main .content .full-article .page aside.author {
+    display: none;
+  }
+}
+main .content .full-article .page aside.author header {
+  display: flex;
+  align-items: center;
+  -moz-column-gap: 0.5em;
+       column-gap: 0.5em;
+  margin-top: -20px;
+}
+main .content .full-article .page aside.author header img {
+  width: 80px;
+  aspect-ratio: 1/1;
+  border-radius: 50%;
+  -o-object-fit: cover;
+     object-fit: cover;
+  margin-left: -1.2em;
+  position: relative;
+  top: -5px;
+}
+main .content .full-article .page aside.author header .name {
+  font-weight: 600;
+  opacity: 0.7;
+}
+main .content .full-article .page aside.author header .role {
+  font-size: 10px;
+  padding: 0.4em 0.8em 0.5em;
+  background-image: linear-gradient(315deg, #d9e4f5 0%, #f5e3e6 74%);
+  border-radius: 150px;
+  font-weight: 600;
+  margin-top: 4px;
+  display: inline-block;
+}
+main .content .full-article .page aside.author footer .socials {
+  margin: 0;
+  margin-top: 0.5em;
+}
+main .content .full-article .page aside.author footer .socials img {
+  aspect-ratio: 1/1;
+  width: 30px;
+  margin: 0 0.3em;
+}
+main .content.settings .nav-link.active {
+  background-color: #172b4d !important;
+}
 
 #bottom-nav {
   position: fixed;
@@ -370,6 +527,7 @@ main .content .articles-overview .post .excerpt a:hover span.material-icons {
   font-size: 14px;
   font-weight: 600;
   text-align: center;
+  height: 25px;
   padding: 0.9rem 0 !important;
 }
 @media screen and (max-width: 520px) {

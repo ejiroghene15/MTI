@@ -23,6 +23,10 @@ class User extends Authenticatable
         'google_id',
         'email_verification_token',
         'bio',
+        'facebook',
+        'twitter',
+        'linkedin',
+        'reddit',
         'phone_number',
         'picture',
         'role',
@@ -66,5 +70,10 @@ class User extends Authenticatable
         // * email => local key on users table -> payments (foreign)
         // * link_id => local key on classes table -> payments(foreign)
         return $this->hasManyThrough(Classes::class, Payments::class, 'user', 'link_id', 'email', 'event_link_id');
+    }
+
+    public function articles()
+    {
+        return $this->hasMany(Articles::class, 'author_id', 'id');
     }
 }

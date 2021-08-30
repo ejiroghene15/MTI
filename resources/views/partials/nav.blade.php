@@ -48,12 +48,12 @@
                     </li>
 
                     <li class="nav-item">
-                        <a class="nav-link " href="/blog">
-                            <span>Blog</span>
+                        <a class="nav-link " href="{{ route('articles.index') }}">
+                            <span>Articles</span>
                         </a>
                     </li>
 
-                    <li class="nav-item">
+                    <li class="nav-item d-none">
                         <a class="nav-link " href="{{ route('library') }}">
                             <span>Library</span>
                         </a>
@@ -63,9 +63,9 @@
 
                     <li class="nav-item dropdown">
 
-                        <span class="avatar avatar-lg rounded-circle d-none d-lg-block" role="button"
+                        <span class="d-none d-lg-block" role="button"
                             data-toggle="dropdown" aria-haspopup="false">
-                            <img alt="Profile pixture" src="{{ auth()->user()->picture }}" height="58" width="58"
+                            <img alt="Profile pixture" class="rounded-circle" src="{{ auth()->user()->picture }}" height="50" width="50"
                                 style="object-fit: cover" />
                         </span>
                         <a class="nav-link nav-link-icon d-block d-lg-none" href="#" role="button"
@@ -74,7 +74,6 @@
                             <i class="ni ni-bold-down"></i>
                         </a>
                         <div class="dropdown-menu dropdown-menu-right">
-                            <a class="dropdown-item" href="{{ route('home') }}">Home</a>
                             <a class="dropdown-item" href="{{ route('dashboard') }}">Dashboard</a>
                             <a class="dropdown-item" href="{{ url('logout') }}">Logout</a>
                         </div>

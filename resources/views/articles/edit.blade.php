@@ -1,8 +1,8 @@
 @php
-$create_article = "active"
+$articles_active = "active"
 @endphp
 @extends('layout.dashboard')
-@section('title', "New Article")
+@section('title', "Edit Article")
 
 @section('content')
 <div class="content">
@@ -13,18 +13,18 @@ $create_article = "active"
     </section>
 
     <header class="content-header">
-        <p>Create a New Post</p>
+        <p>Update Post</p>
     </header>
 
-    <form action="{{ route('articles.store') }}" method="post" class="form-row my-4 mx-2 new-post"
+    <form action="{{ route('articles.update', $article) }}" method="post" class="form-row my-3 mx-2 new-post edit"
         enctype="multipart/form-data">
         @csrf
+        @method("PUT")
         <aside class="post-thumbnail">
             <aside>
-                <p style="font-size: 14px; font-weight: 600; ">Upload thumbnail for your post</p>
-                <input type="file" class="form-control dropify" name="thumbnail" accept=".jpg, .jpeg, .png"
-                    data-default-file="https://res.cloudinary.com/https-midastouchacademy-com/image/upload/v1618693692/mti_logo.jpg"
-                    required>
+                <p style="font-size: 14px; font-weight: 600; ">Thumbnail</p>
+                <input type="file" class="form-control dropify" name="" accept=".jpg, .jpeg, .png"
+                    data-default-file="{{ $article->thumbnail }}" disabled>
                 @error('thumbnail') <small class="error-display text-danger">{{ $message }}</small> @enderror
             </aside>
         </aside>
@@ -33,10 +33,12 @@ $create_article = "active"
             <div class="form-row">
                 <div class="col-md-6 mb-3">
                     <div class="form-group">
-                        <label for="">Select a Category</label>
+                        <label for="">Category</label>
                         <select name="category_id" class="form-control form-control-alternative" required>
                             @foreach ($categories as $cat)
-                            <option value="{{ $cat->id }}">{{ $cat->category }}</option>
+                            <option value="{{ $cat->id }}" {{ $cat->id == $article->category->id ? 'selected' : '' }}>
+                                {{ $cat->category }}
+                            </option>
                             @endforeach
                         </select>
                     </div>
@@ -45,20 +47,20 @@ $create_article = "active"
                     <div class="form-group">
                         <label for="">Title of your Post</label>
                         <input type="text" name="title" class="form-control form-control-alternative"
-                            value="{{ old('title') }}" required>
+                            value="{{ old('title') ?? $article->title }}" required>
                         @error('title') <small class="error-display text-danger">{{ $message }}</small> @enderror
                     </div>
                 </div>
                 <div class="col-md-12">
                     <div class="form-group">
                         @error('body') <small class="error-display text-danger">{{ $message }}</small> @enderror
-                        <textarea name="body" class="form-control form-control-alternative editor"
-                            placeholder="Write a post"></textarea>
+                        <textarea name="body"
+                            class="form-control form-control-alternative editor">{{ $article->body }}</textarea>
                     </div>
                 </div>
             </div>
             <div class="form-group">
-                <button class="btn btn-success">Publish post</button>
+                <button class="btn btn-success">Update post</button>
             </div>
         </section>
     </form>

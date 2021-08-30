@@ -24,6 +24,10 @@ class CreateUsersTable extends Migration
             $table->string('role')->nullable();
             $table->string('course')->nullable();
             $table->text('bio')->nullable();
+            $table->text('facebook')->nullable();
+            $table->text('twitter')->nullable();
+            $table->text('linkedin')->nullable();
+            $table->text('reddit')->nullable();
             $table->string('picture')->nullable();
             $table->string('reset_password_token')->nullable();
             $table->string('reset_password_token_expired')->nullable();
